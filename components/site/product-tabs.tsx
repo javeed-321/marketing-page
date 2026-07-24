@@ -23,7 +23,7 @@ export function ProductTabs() {
     <ElTabGroup className="flex w-full flex-col items-center gap-8 rounded-3xl bg-mauve-950/2.5 p-4 ring-1 ring-mauve-950/5 sm:p-6 dark:bg-white/5 dark:ring-white/10">
       {/* Tab bar — below xl only the selected tab shows its label; tab 0 is pre-selected in SSR markup so there is no hydration flash */}
       <div className="max-w-full overflow-x-auto">
-        <ElTabList role="tablist" className="flex gap-1">
+        <ElTabList role="tablist" className="flex items-center gap-1">
           {TABS.map((tab, index) => (
             <button
               key={tab.label}
@@ -31,7 +31,7 @@ export function ProductTabs() {
               role="tab"
               aria-selected={index === 0}
               tabIndex={index === 0 ? 0 : -1}
-              className="group inline-flex shrink-0 items-center gap-2 rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap text-mauve-500 transition-colors hover:text-mauve-950 aria-selected:bg-white aria-selected:text-mauve-950 aria-selected:shadow-sm xl:px-4 dark:text-mauve-400 dark:hover:text-white dark:aria-selected:bg-mauve-800 dark:aria-selected:text-white"
+              className="group mb-2 inline-flex shrink-0 items-center gap-2 rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap text-mauve-500 transition-colors hover:text-mauve-950 aria-selected:bg-white aria-selected:text-mauve-950 aria-selected:shadow-sm xl:px-4 dark:text-mauve-400 dark:hover:text-white dark:aria-selected:bg-mauve-800 dark:aria-selected:text-white"
             >
               <tab.Icon className="size-4" />
               <span className="hidden group-aria-selected:inline xl:inline">{tab.label}</span>
