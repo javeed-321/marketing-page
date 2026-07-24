@@ -20,10 +20,10 @@ const TABS = [
 
 export function ProductTabs() {
   return (
-    <ElTabGroup className="flex w-full flex-col items-center">
+    <ElTabGroup className="flex w-full flex-col items-center gap-8 rounded-3xl bg-mauve-950/2.5 p-4 ring-1 ring-mauve-950/5 sm:p-6 dark:bg-white/5 dark:ring-white/10">
       {/* Tab bar — native template tabs; the web component toggles aria-selected + panels */}
       <div className="max-w-full overflow-x-auto">
-        <ElTabList className="flex gap-1 rounded-full bg-mauve-950/5 p-1 dark:bg-white/5">
+        <ElTabList className="flex gap-1">
           {TABS.map((tab) => (
             <button
               key={tab.label}
@@ -38,7 +38,7 @@ export function ProductTabs() {
       </div>
 
       {/* Panels — one per tab, matched by order */}
-      <ElTabPanels className="mt-8 w-full">
+      <ElTabPanels className="w-full">
         {TABS.map((tab) => (
           <div
             key={tab.label}
