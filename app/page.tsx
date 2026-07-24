@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <HeroLeftAlignedWithDemo
       id="hero"
-      eyebrow={<AnnouncementBadge href="#" text="Knowledge Infrastructure For AI Agents And Humans" cta="Learn more" />}
+      eyebrow={<AnnouncementBadge href="#" text="Knowledge Infrastructure For AI Agents And Humans" />}
       headline="The AI Documentation Platform"
       subheadline={
         <p>
