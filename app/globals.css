@@ -43,6 +43,23 @@
   --color-mauve-950: #09090b;
 }
 
+@layer components {
+  /* FAQ accordion — animates <details> content height both on open and close.
+   * Relies on `interpolate-size: allow-keywords` (below) so height can
+   * transition to/from `auto`. `allow-discrete` keeps the content painted
+   * until the close transition finishes. */
+  .faq-disclosure::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition:
+      block-size 300ms ease-out,
+      content-visibility 300ms allow-discrete;
+  }
+  .faq-disclosure[open]::details-content {
+    block-size: auto;
+  }
+}
+
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;

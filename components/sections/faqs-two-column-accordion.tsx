@@ -1,45 +1,29 @@
-import { ElDisclosure } from '@tailwindplus/elements/react'
 import { clsx } from 'clsx/lite'
-import { type ComponentProps, type ReactNode, useId } from 'react'
+import { type ComponentProps, type ReactNode } from 'react'
 import { Container } from '../elements/container'
 import { Subheading } from '../elements/subheading'
 import { Text } from '../elements/text'
 import { MinusIcon } from '../icons/minus-icon'
 import { PlusIcon } from '../icons/plus-icon'
 
+// Native <details> so open AND close both animate: the .faq-disclosure rules in
+// globals.css transition ::details-content's height between 0 and auto (via
+// `interpolate-size: allow-keywords`). Unlike a hidden-attribute disclosure, the
+// browser keeps the content rendered while the close transition plays.
 export function Faq({
-  id,
   question,
   answer,
   ...props
-}: { question: ReactNode; answer: ReactNode } & ComponentProps<'div'>) {
-  const autoId = useId()
-  id = id || autoId
-
+}: { question: ReactNode; answer: ReactNode } & ComponentProps<'details'>) {
   return (
-    <div id={id} {...props}>
-      <button
-        type="button"
-        id={`${id}-question`}
-        command="--toggle"
-        commandfor={`${id}-answer`}
-        className="flex w-full items-start justify-between gap-6 py-4 text-left text-base/6 text-mauve-950 dark:text-white"
-      >
+    <details className="faq-disclosure group" {...props}>
+      <summary className="flex w-full cursor-pointer list-none items-start justify-between gap-6 py-4 text-left text-base/6 text-mauve-950 select-none dark:text-white [&::-webkit-details-marker]:hidden">
         {question}
-        <PlusIcon className="h-lh in-aria-expanded:hidden" />
-        <MinusIcon className="h-lh not-in-aria-expanded:hidden" />
-      </button>
-      {/* Smooth open/close: the elements runtime toggles data-closed during the
-        * transition; `interpolate-size: allow-keywords` (globals.css) lets height
-        * animate from 0 to auto in Chromium. Other engines animate opacity only. */}
-      <ElDisclosure
-        id={`${id}-answer`}
-        hidden
-        className="block h-auto overflow-hidden transition-[height,opacity] duration-300 ease-out data-closed:h-0 data-closed:opacity-0"
-      >
-        <div className="-mt-2 flex flex-col gap-2 pr-12 pb-4 text-sm/5 text-mauve-700 dark:text-mauve-400">{answer}</div>
-      </ElDisclosure>
-    </div>
+        <PlusIcon className="h-lh group-open:hidden" />
+        <MinusIcon className="h-lh not-group-open:hidden" />
+      </summary>
+      <div className="flex flex-col gap-2 pr-12 pb-4 text-sm/5 text-mauve-700 dark:text-mauve-400">{answer}</div>
+    </details>
   )
 }
 
