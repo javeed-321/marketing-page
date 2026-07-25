@@ -2,7 +2,6 @@ import Link from 'next/link'
 
 import { clsx } from 'clsx/lite'
 import type { ComponentProps, ReactNode } from 'react'
-import { Container } from '../elements/container'
 import { ArrowNarrowRightIcon } from '../icons/arrow-narrow-right-icon'
 
 export function FooterCategory({ title, children, ...props }: { title: ReactNode } & ComponentProps<'div'>) {
@@ -93,43 +92,42 @@ export function FooterWithNewsletterFormCategoriesAndSocialIcons({
 } & ComponentProps<'footer'>) {
   return (
     <footer className={clsx('pt-16', className)} {...props}>
-      <div
-        className={clsx(
-          'overflow-hidden bg-mauve-950/2.5 pt-16 text-mauve-950 dark:bg-white/5 dark:text-white',
-          !watermark && 'pb-16',
-        )}
-      >
-        <Container className="flex flex-col gap-16">
-          <div className="grid grid-cols-1 gap-x-6 gap-y-16 text-sm/7 lg:grid-cols-2">
-            {cta}
-            <nav className="grid grid-cols-2 gap-6 sm:has-[>:last-child:nth-child(3)]:grid-cols-3 sm:has-[>:nth-child(5)]:grid-cols-3 md:has-[>:last-child:nth-child(4)]:grid-cols-4 lg:max-xl:has-[>:last-child:nth-child(4)]:grid-cols-2">
-              {links}
-            </nav>
+      <div className="overflow-hidden bg-mauve-950/2.5 py-16 text-mauve-950 dark:bg-white/5 dark:text-white">
+        {/* Footer content spans a little wider than the body sections so the four link
+          * columns sit next to the brand block with room to breathe (no wasted gap). */}
+        <div className="mx-auto w-full max-w-2xl px-6 md:max-w-3xl lg:max-w-352 lg:px-10">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 text-sm/7 sm:grid-cols-3 lg:grid-cols-[19rem_1fr_1fr_1fr_1fr]">
+            <div className="col-span-2 sm:col-span-3 lg:col-span-1">{cta}</div>
+            {/* display:contents so each category becomes a column of the grid above */}
+            <nav className="contents">{links}</nav>
           </div>
           {(fineprint || socialLinks) && (
-            <div className="flex items-center justify-between gap-10 text-sm/7">
+            <div className="mt-16 flex items-center justify-between gap-10 text-sm/7">
               <div className="text-mauve-600 dark:text-mauve-500">{fineprint}</div>
               {socialLinks && <div className="flex items-center gap-4 sm:gap-10">{socialLinks}</div>}
             </div>
           )}
-        </Container>
+        </div>
         {watermark && (
-          <div aria-hidden="true" className="pointer-events-none mt-12 overflow-hidden select-none">
-            {/* SVG so the wordmark always scales to the container width (never overflows
+          // Watermark kept narrower than the content so it reads as an inset background flourish.
+          <div className="mx-auto mt-14 w-full max-w-2xl px-6 md:max-w-3xl lg:max-w-7xl lg:px-10">
+            {/* SVG so the wordmark always scales to its container width (never overflows
               * horizontally) and is clipped along the bottom, matching documentation.ai. */}
-            <svg viewBox="0 0 1120 62" width="100%" preserveAspectRatio="xMidYMin meet" className="block w-full">
-              <text
-                x="560"
-                y="86"
-                textAnchor="middle"
-                textLength="1060"
-                lengthAdjust="spacingAndGlyphs"
-                style={{ fontSize: '120px' }}
-                className="fill-mauve-950/6 font-display font-medium dark:fill-white/5"
-              >
-                {watermark}
-              </text>
-            </svg>
+            <div aria-hidden="true" className="pointer-events-none overflow-hidden select-none">
+              <svg viewBox="0 0 1200 70" width="100%" preserveAspectRatio="xMidYMin meet" className="block w-full">
+                <text
+                  x="600"
+                  y="98"
+                  textAnchor="middle"
+                  textLength="1170"
+                  lengthAdjust="spacingAndGlyphs"
+                  style={{ fontSize: '133px' }}
+                  className="fill-mauve-950/6 font-display font-medium dark:fill-white/5"
+                >
+                  {watermark}
+                </text>
+              </svg>
+            </div>
           </div>
         )}
       </div>
