@@ -16,13 +16,13 @@ export function BentoCard({
   return (
     <div
       className={clsx(
-        'flex flex-col gap-10 rounded-3xl bg-card p-8 ring-1 ring-card-border dark:bg-white/5 dark:ring-white/10',
+        'flex flex-col gap-10 rounded-3xl bg-card p-8 dark:bg-white/5',
         className,
       )}
       {...props}
     >
       {icon && (
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 ring-1 ring-card-border dark:bg-white/10 dark:text-white dark:ring-white/10">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 dark:bg-white/10 dark:text-white">
           {icon}
         </div>
       )}

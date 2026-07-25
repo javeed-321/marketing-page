@@ -30,10 +30,10 @@ export function BentoFeaturedSection({
             <div
               key={i}
               className={clsx(
-                'flex flex-col overflow-hidden rounded-3xl ring-1 lg:col-span-3',
+                'flex flex-col overflow-hidden rounded-3xl lg:col-span-3',
                 red
-                  ? 'bg-red-500 ring-red-600/20'
-                  : 'bg-card ring-card-border dark:bg-white/5 dark:ring-white/10',
+                  ? 'bg-red-500'
+                  : 'bg-card dark:bg-white/5',
               )}
             >
               {f.media ? (
@@ -56,9 +56,9 @@ export function BentoFeaturedSection({
         {cards.map((c, i) => (
           <div
             key={i}
-            className="flex flex-col gap-6 rounded-3xl bg-card p-8 ring-1 ring-card-border lg:col-span-2 dark:bg-white/5 dark:ring-white/10"
+            className="flex flex-col gap-6 rounded-3xl bg-card p-8 lg:col-span-2 dark:bg-white/5"
           >
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 ring-1 ring-card-border dark:bg-white/10 dark:text-white dark:ring-white/10">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 dark:bg-white/10 dark:text-white">
               {c.icon}
             </div>
             <div className="flex flex-col gap-2">

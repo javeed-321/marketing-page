@@ -17,7 +17,7 @@ function FeatureItem({
 }: { icon: ReactNode; headline: ReactNode; subheadline: ReactNode } & ComponentProps<'div'>) {
   return (
     <div className={clsx('flex flex-col gap-8 py-8 lg:py-10', className)}>
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 ring-1 ring-card-border dark:bg-white/10 dark:text-white dark:ring-white/10">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 dark:bg-white/10 dark:text-white">
         {icon}
       </div>
       <div className="flex flex-col gap-2">

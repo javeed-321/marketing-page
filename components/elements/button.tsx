@@ -73,7 +73,7 @@ export function SoftButton({
     <button
       type={type}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-card text-[15px]/5 font-medium text-mauve-950 ring-1 ring-card-border hover:bg-[#eceae7] dark:bg-white/10 dark:text-white dark:ring-white/10 dark:hover:bg-white/20',
+        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-card text-[15px]/5 font-medium text-mauve-950 hover:bg-[#eceae7] dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
         sizes[size],
         className,
       )}
@@ -95,7 +95,7 @@ export function SoftButtonLink({
     <Link
       href={href}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-card text-[15px]/5 font-medium text-mauve-950 ring-1 ring-card-border hover:bg-[#eceae7] dark:bg-white/10 dark:text-white dark:ring-white/10 dark:hover:bg-white/20',
+        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-card text-[15px]/5 font-medium text-mauve-950 hover:bg-[#eceae7] dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
         sizes[size],
         className,
       )}
