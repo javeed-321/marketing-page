@@ -15,27 +15,32 @@
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-  /* Brand red — documentation.ai uses a soft coral (#ED5A5C), not Tailwind's
+  /* Brand red — documentation.ai's exact Framer token (#EC5B5B), not Tailwind's
    * vivid default red-500 (#FB2C36). Drives the badge, "01–04" labels, the
    * red subheading, the "Run" button and the Agentic assistant card. */
-  --color-red-400: oklch(71.5% 0.1514 20.62);
-  --color-red-500: oklch(66.1% 0.1819 22.75);
-  --color-red-600: oklch(60.3% 0.176 23.29);
+  --color-red-400: #f37a7a;
+  --color-red-500: #ec5b5b;
+  --color-red-600: #d64a4a;
 
-  /* Warm-gray ("oatmeal") scale — documentation.ai's neutrals carry a subtle warm
-   * hue (sampled body text ≈ rgb(143,130,129), R>G>B). A low warm chroma tints
-   * card surfaces, borders and body text together without reading as brown. */
+  /* Surface tokens lifted from documentation.ai's Framer tokens:
+   * card bg #F5F3F1, card/section border #E3E1DF (page bg is #FCFCFC). */
+  --color-card: #f5f3f1;
+  --color-card-border: #e3e1df;
+
+  /* Warm-gray ("oatmeal") scale — anchored to documentation.ai's exact Framer
+   * tokens: body gray #787168 (mauve-700), muted gray #A59F98 (mauve-500),
+   * near-black #09090B (mauve-950). Other steps interpolate around them. */
   --color-mauve-50: oklch(98.5% 0.001 106);
   --color-mauve-100: oklch(96% 0.002 106);
   --color-mauve-200: oklch(92.2% 0.004 106);
   --color-mauve-300: oklch(86.5% 0.005 90);
-  --color-mauve-400: oklch(71.1% 0.008 74);
-  --color-mauve-500: oklch(54.2% 0.01 67);
-  --color-mauve-600: oklch(43.5% 0.009 67);
-  --color-mauve-700: oklch(36.4% 0.008 67);
-  --color-mauve-800: oklch(26.3% 0.006 67);
-  --color-mauve-900: oklch(21.2% 0.005 67);
-  --color-mauve-950: oklch(14.5% 0.004 67);
+  --color-mauve-400: #b8b2ac;
+  --color-mauve-500: #a59f98;
+  --color-mauve-600: #8b847c;
+  --color-mauve-700: #787168;
+  --color-mauve-800: #5b4f4b;
+  --color-mauve-900: #473c39;
+  --color-mauve-950: #09090b;
 }
 
 @layer base {
@@ -46,6 +51,9 @@
     background-color: #fcfcfc;
     --scroll-padding-top: 0;
     scroll-padding-top: var(--scroll-padding-top);
+    /* Lets height animate between 0 and auto (Chromium) — used by the FAQ
+     * accordion for a smooth open/close. Other engines fall back to instant. */
+    interpolate-size: allow-keywords;
 
     @variant dark {
       background-color: var(--color-mauve-950);

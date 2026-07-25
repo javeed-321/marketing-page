@@ -30,10 +30,10 @@ export function BentoFeaturedSection({
             <div
               key={i}
               className={clsx(
-                'flex flex-col overflow-hidden rounded-2xl ring-1 lg:col-span-3',
+                'flex flex-col overflow-hidden rounded-3xl ring-1 lg:col-span-3',
                 red
                   ? 'bg-red-500 ring-red-600/20'
-                  : 'bg-white ring-mauve-950/5 dark:bg-white/5 dark:ring-white/10',
+                  : 'bg-card ring-card-border dark:bg-white/5 dark:ring-white/10',
               )}
             >
               {f.media ? (
@@ -43,10 +43,10 @@ export function BentoFeaturedSection({
                 <img src={f.img} alt="" className="h-72 w-full object-cover object-top-left" />
               )}
               <div className="flex flex-col gap-2 p-8">
-                <h3 className={clsx('text-lg/8 font-medium', red ? 'text-white' : 'text-mauve-950 dark:text-white')}>
+                <h3 className={clsx('font-display text-lg/normal font-normal', red ? 'text-white' : 'text-mauve-950 dark:text-white')}>
                   {f.title}
                 </h3>
-                <p className={clsx('text-base/7', red ? 'text-white/80' : 'text-mauve-700 dark:text-mauve-400')}>
+                <p className={clsx('text-sm/5', red ? 'text-white/80' : 'text-mauve-700 dark:text-mauve-400')}>
                   {f.desc}
                 </p>
               </div>
@@ -56,14 +56,14 @@ export function BentoFeaturedSection({
         {cards.map((c, i) => (
           <div
             key={i}
-            className="flex flex-col gap-6 rounded-2xl bg-white p-8 ring-1 ring-mauve-950/5 lg:col-span-2 dark:bg-white/5 dark:ring-white/10"
+            className="flex flex-col gap-6 rounded-3xl bg-card p-8 ring-1 ring-card-border lg:col-span-2 dark:bg-white/5 dark:ring-white/10"
           >
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-mauve-950/5 text-mauve-950 ring-1 ring-mauve-950/5 dark:bg-white/10 dark:text-white dark:ring-white/10">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 ring-1 ring-card-border dark:bg-white/10 dark:text-white dark:ring-white/10">
               {c.icon}
             </div>
             <div className="flex flex-col gap-2">
-              <h3 className="text-lg/8 font-medium text-mauve-950 dark:text-white">{c.title}</h3>
-              <p className="text-base/7 text-mauve-700 dark:text-mauve-400">{c.desc}</p>
+              <h3 className="font-display text-lg/normal font-normal text-mauve-950 dark:text-white">{c.title}</h3>
+              <p className="text-sm/5 text-mauve-700 dark:text-mauve-400">{c.desc}</p>
             </div>
           </div>
         ))}

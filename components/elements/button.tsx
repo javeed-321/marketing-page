@@ -4,8 +4,8 @@ import { clsx } from 'clsx/lite'
 import type { ComponentProps } from 'react'
 
 const sizes = {
-  md: 'px-3 py-1',
-  lg: 'px-4 py-2',
+  md: 'px-3 py-2',
+  lg: 'px-3.5 py-2',
 }
 
 export function Button({
@@ -22,7 +22,7 @@ export function Button({
     <button
       type={type}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-sm/7 font-medium',
+        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-[15px]/5 font-medium',
         color === 'dark/light' &&
           'bg-mauve-950 text-white hover:bg-mauve-800 dark:bg-mauve-300 dark:text-mauve-950 dark:hover:bg-mauve-200',
         color === 'light' && 'hover bg-white text-mauve-950 hover:bg-mauve-100 dark:bg-mauve-100 dark:hover:bg-white',
@@ -49,7 +49,7 @@ export function ButtonLink({
     <Link
       href={href}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-sm/7 font-medium',
+        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-[15px]/5 font-medium',
         color === 'dark/light' &&
           'bg-mauve-950 text-white hover:bg-mauve-800 dark:bg-mauve-300 dark:text-mauve-950 dark:hover:bg-mauve-200',
         color === 'light' && 'hover bg-white text-mauve-950 hover:bg-mauve-100 dark:bg-mauve-100 dark:hover:bg-white',
@@ -73,7 +73,7 @@ export function SoftButton({
     <button
       type={type}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-mauve-950/10 text-sm/7 font-medium text-mauve-950 hover:bg-mauve-950/15 dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
+        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-card text-[15px]/5 font-medium text-mauve-950 ring-1 ring-card-border hover:bg-[#eceae7] dark:bg-white/10 dark:text-white dark:ring-white/10 dark:hover:bg-white/20',
         sizes[size],
         className,
       )}
@@ -95,7 +95,7 @@ export function SoftButtonLink({
     <Link
       href={href}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-mauve-950/10 text-sm/7 font-medium text-mauve-950 hover:bg-mauve-950/15 dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
+        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-card text-[15px]/5 font-medium text-mauve-950 ring-1 ring-card-border hover:bg-[#eceae7] dark:bg-white/10 dark:text-white dark:ring-white/10 dark:hover:bg-white/20',
         sizes[size],
         className,
       )}
@@ -118,7 +118,7 @@ export function PlainButton({
     <button
       type={type}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-2 rounded-full text-sm/7 font-medium',
+        'inline-flex shrink-0 items-center justify-center gap-2 rounded-full text-[15px]/5 font-medium',
         color === 'dark/light' && 'text-mauve-950 hover:bg-mauve-950/10 dark:text-white dark:hover:bg-white/10',
         color === 'light' && 'text-white hover:bg-white/15 dark:hover:bg-white/10',
         sizes[size],
@@ -144,7 +144,7 @@ export function PlainButtonLink({
     <Link
       href={href}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-2 rounded-full text-sm/7 font-medium',
+        'inline-flex shrink-0 items-center justify-center gap-2 rounded-full text-[15px]/5 font-medium',
         color === 'dark/light' && 'text-mauve-950 hover:bg-mauve-950/10 dark:text-white dark:hover:bg-white/10',
         color === 'light' && 'text-white hover:bg-white/15 dark:hover:bg-white/10',
         sizes[size],

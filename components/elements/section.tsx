@@ -23,7 +23,7 @@ export function Section({
     <section className={clsx('py-16', className)} {...props}>
       <Container className="flex flex-col gap-10 sm:gap-16">
         {headline && (
-          <div className="flex max-w-xl flex-col gap-6">
+          <div className="flex max-w-2xl flex-col gap-6">
             <div className="flex flex-col gap-2">
               {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
               <Subheading>{headline}</Subheading>

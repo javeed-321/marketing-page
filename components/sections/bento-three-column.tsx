@@ -16,19 +16,19 @@ export function BentoCard({
   return (
     <div
       className={clsx(
-        'flex flex-col gap-10 rounded-2xl bg-mauve-950/2.5 p-8 ring-1 ring-mauve-950/5 dark:bg-white/5 dark:ring-white/10',
+        'flex flex-col gap-10 rounded-3xl bg-card p-8 ring-1 ring-card-border dark:bg-white/5 dark:ring-white/10',
         className,
       )}
       {...props}
     >
       {icon && (
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 ring-1 ring-mauve-950/5 dark:bg-white/10 dark:text-white dark:ring-white/10">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 ring-1 ring-card-border dark:bg-white/10 dark:text-white dark:ring-white/10">
           {icon}
         </div>
       )}
       <div className="flex flex-col gap-2">
-        <h3 className="text-lg/8 font-medium text-mauve-950 dark:text-white">{headline}</h3>
-        <div className="flex flex-col gap-4 text-base/7 text-mauve-700 dark:text-mauve-400">{subheadline}</div>
+        <h3 className="font-display text-lg/normal font-normal text-mauve-950 dark:text-white">{headline}</h3>
+        <div className="flex flex-col gap-4 text-sm/5 text-mauve-700 dark:text-mauve-400">{subheadline}</div>
       </div>
     </div>
   )

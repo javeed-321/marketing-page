@@ -4,10 +4,10 @@ import type { ComponentProps, ReactNode } from 'react'
 import { Container } from '@/components/elements/container'
 import { Subheading } from '@/components/elements/subheading'
 import { Text } from '@/components/elements/text'
-import { DocumentIcon } from '@/components/icons/document-icon'
-import { HardDriveIcon } from '@/components/icons/hard-drive-icon'
-import { RepeatIcon } from '@/components/icons/repeat-icon'
-import { UiLayoutIcon } from '@/components/icons/ui-layout-icon'
+import { LlmsTxtIcon } from '@/components/icons/framer/llms-txt-icon'
+import { McpServerIcon } from '@/components/icons/framer/mcp-server-icon'
+import { StructuredContentIcon } from '@/components/icons/framer/structured-content-icon'
+import { RefreshCwIcon } from '@/components/icons/refresh-cw-icon'
 
 function FeatureItem({
   icon,
@@ -17,12 +17,12 @@ function FeatureItem({
 }: { icon: ReactNode; headline: ReactNode; subheadline: ReactNode } & ComponentProps<'div'>) {
   return (
     <div className={clsx('flex flex-col gap-8 py-8 lg:py-10', className)}>
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 ring-1 ring-mauve-950/5 dark:bg-white/10 dark:text-white dark:ring-white/10">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 ring-1 ring-card-border dark:bg-white/10 dark:text-white dark:ring-white/10">
         {icon}
       </div>
       <div className="flex flex-col gap-2">
-        <h3 className="text-lg/8 font-medium text-mauve-950 dark:text-white">{headline}</h3>
-        <div className="flex flex-col gap-4 text-base/7 text-mauve-700 dark:text-mauve-400">{subheadline}</div>
+        <h3 className="font-display text-lg/normal font-normal text-mauve-950 dark:text-white">{headline}</h3>
+        <div className="flex flex-col gap-4 text-sm/5 text-mauve-700 dark:text-mauve-400">{subheadline}</div>
       </div>
     </div>
   )
@@ -58,7 +58,7 @@ export function BuiltForAI() {
 
           <FeatureItem
             className="lg:col-start-1 lg:row-start-1"
-            icon={<UiLayoutIcon className="size-5" />}
+            icon={<StructuredContentIcon className="size-5" />}
             headline="Structured content"
             subheadline={
               <p>
@@ -69,7 +69,7 @@ export function BuiltForAI() {
           />
           <FeatureItem
             className="lg:col-start-1 lg:row-start-2"
-            icon={<DocumentIcon className="size-5" />}
+            icon={<LlmsTxtIcon className="size-5" />}
             headline="Auto-generated llms.txt"
             subheadline={
               <p>
@@ -80,7 +80,7 @@ export function BuiltForAI() {
           />
           <FeatureItem
             className="lg:col-start-3 lg:row-start-1"
-            icon={<RepeatIcon className="size-5" />}
+            icon={<RefreshCwIcon className="size-5" />}
             headline="Up-to-date information for AI agents"
             subheadline={
               <p>
@@ -91,7 +91,7 @@ export function BuiltForAI() {
           />
           <FeatureItem
             className="lg:col-start-3 lg:row-start-2"
-            icon={<HardDriveIcon className="size-5" />}
+            icon={<McpServerIcon className="size-5" />}
             headline="MCP server"
             subheadline={
               <p>

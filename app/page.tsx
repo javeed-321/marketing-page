@@ -14,15 +14,23 @@ export default function Page() {
   return (
     <>
       <HeroSection />
-      <DocsThatKeepUp />
-      <AiDocumentationAgent />
-      <BuiltForAI />
-      <BeautifulDocs />
-      <MoreReasons />
-      <TrustedBy />
-      <PublishingExperience />
-      <FinalCta />
-      <FaqsSection />
+      {/* Vertical layout rails (1px, #F0EFEF) flanking the 75rem content column —
+          matches documentation.ai, which runs them from below the hero to the FAQ. */}
+      <div className="relative">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full max-w-300 -translate-x-1/2 border-x border-[#F0EFEF] lg:block dark:border-white/5"
+        />
+        <DocsThatKeepUp />
+        <AiDocumentationAgent />
+        <BuiltForAI />
+        <BeautifulDocs />
+        <MoreReasons />
+        <TrustedBy />
+        <PublishingExperience />
+        <FinalCta />
+        <FaqsSection />
+      </div>
       <SiteFooter />
     </>
   )

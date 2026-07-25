@@ -1,6 +1,6 @@
-import { ChatBubbleCircleIcon } from '@/components/icons/chat-bubble-circle-icon'
-import { HardDriveIcon } from '@/components/icons/hard-drive-icon'
-import { LightingBoltIcon } from '@/components/icons/lighting-bolt-icon'
+import { FeedbackIcon } from '@/components/icons/framer/feedback-icon'
+import { LightningFastIcon } from '@/components/icons/framer/lightning-fast-icon'
+import { McpIcon } from '@/components/icons/framer/mcp-icon'
 import { BentoFeaturedSection } from '@/components/sections/bento-featured'
 import { AgenticAssistantCard } from '@/components/site/agentic-assistant-card'
 
@@ -25,17 +25,17 @@ export function MoreReasons() {
       ]}
       cards={[
         {
-          icon: <LightingBoltIcon className="size-5" />,
+          icon: <LightningFastIcon className="size-5" />,
           title: 'Lightning Fast',
           desc: 'Faster docs that hit 100/100 Lighthouse score across performance, accessibility and SEO.',
         },
         {
-          icon: <HardDriveIcon className="size-5" />,
+          icon: <McpIcon className="size-5" />,
           title: 'Model Context Protocol (MCP)',
           desc: 'Surface the same up-to-date docs in chatbots, coding agents, and in-product overlays.',
         },
         {
-          icon: <ChatBubbleCircleIcon className="size-5" />,
+          icon: <FeedbackIcon className="size-5" />,
           title: 'Feedback',
           desc: 'Collect precise feedback from users directly on every page.',
         },

@@ -13,7 +13,8 @@ export function AnnouncementBadge({
   href?: string
 } & Omit<ComponentProps<'a'>, 'href' | 'children'>) {
   const classes = clsx(
-    'inline-flex max-w-full items-center gap-x-2 rounded-full bg-red-500/10 px-3 py-1 text-sm/6 font-medium text-mauve-950 dark:text-white',
+    // Geist Mono 12px — matches the original badge (Framer: 12px mono, +0.01em)
+    'inline-flex max-w-full items-center gap-x-2 rounded-full bg-red-500/10 px-3 py-1.5 font-mono text-xs/[18px] tracking-[0.01em] text-mauve-950 dark:text-white',
     href && 'transition-colors hover:bg-red-500/15',
     className,
   )

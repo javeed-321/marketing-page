@@ -37,7 +37,7 @@ export function SocialLink({
       href={href}
       target="_blank"
       aria-label={name}
-      className={clsx('text-mauve-500 transition-colors *:size-5 hover:text-mauve-950 dark:text-mauve-400 dark:hover:text-white', className)}
+      className={clsx('text-mauve-500 transition-colors *:h-5 *:w-auto hover:text-mauve-950 dark:text-mauve-400 dark:hover:text-white', className)}
       {...props}
     />
   )
@@ -96,13 +96,13 @@ export function FooterWithNewsletterFormCategoriesAndSocialIcons({
         {/* Footer content spans a little wider than the body sections so the four link
           * columns sit next to the brand block with room to breathe (no wasted gap). */}
         <div className="mx-auto w-full max-w-2xl px-6 md:max-w-3xl lg:max-w-352 lg:px-10">
-          <div className="grid grid-cols-2 gap-x-8 gap-y-12 text-sm/7 sm:grid-cols-3 lg:grid-cols-[19rem_1fr_1fr_1fr_1fr]">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 text-[13px]/5 sm:grid-cols-3 lg:grid-cols-[19rem_1fr_1fr_1fr_1fr]">
             <div className="col-span-2 sm:col-span-3 lg:col-span-1">{cta}</div>
             {/* display:contents so each category becomes a column of the grid above */}
             <nav className="contents">{links}</nav>
           </div>
           {(fineprint || socialLinks) && (
-            <div className="mt-16 flex items-center justify-between gap-10 text-sm/7">
+            <div className="mt-16 flex items-center justify-between gap-10 text-[13px]/5">
               <div className="text-mauve-600 dark:text-mauve-500">{fineprint}</div>
               {socialLinks && <div className="flex items-center gap-4 sm:gap-10">{socialLinks}</div>}
             </div>
@@ -111,23 +111,7 @@ export function FooterWithNewsletterFormCategoriesAndSocialIcons({
         {watermark && (
           // Watermark kept narrower than the content so it reads as an inset background flourish.
           <div className="mx-auto mt-14 w-full max-w-2xl px-6 md:max-w-3xl lg:max-w-7xl lg:px-10">
-            {/* SVG so the wordmark always scales to its container width (never overflows
-              * horizontally) and is clipped along the bottom, matching documentation.ai. */}
-            <div aria-hidden="true" className="pointer-events-none overflow-hidden select-none">
-              <svg viewBox="0 0 1200 70" width="100%" preserveAspectRatio="xMidYMin meet" className="block w-full">
-                <text
-                  x="600"
-                  y="98"
-                  textAnchor="middle"
-                  textLength="1170"
-                  lengthAdjust="spacingAndGlyphs"
-                  style={{ fontSize: '133px' }}
-                  className="fill-mauve-950/6 font-display font-medium dark:fill-white/5"
-                >
-                  {watermark}
-                </text>
-              </svg>
-            </div>
+            <div className="pointer-events-none overflow-hidden select-none">{watermark}</div>
           </div>
         )}
       </div>

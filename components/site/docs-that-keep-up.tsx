@@ -35,7 +35,7 @@ export function DocsThatKeepUp() {
   return (
     <section id="ai-workflows" className="py-16">
       <Container className="flex flex-col gap-8">
-        <div className="flex max-w-xl flex-col gap-6">
+        <div className="flex max-w-2xl flex-col gap-6">
           <Subheading>Docs that keep up with your product</Subheading>
           <Text className="text-pretty">
             <p>
@@ -48,7 +48,7 @@ export function DocsThatKeepUp() {
           {AI_WORKFLOWS.map((f) => (
             <FeatureThreeColumnWithDemos
               key={f.n}
-              className="rounded-2xl"
+              className="rounded-3xl"
               demo={
                 <div className="flex items-center justify-center px-6 pt-12 pb-6">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

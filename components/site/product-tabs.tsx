@@ -1,26 +1,26 @@
 import { ElTabGroup, ElTabList, ElTabPanels } from '@tailwindplus/elements/react'
 
-import { AiWorkflowsIcon } from '@/components/icons/ai-workflows-icon'
-import { BookIcon } from '@/components/icons/book-icon'
-import { BookOpenIcon } from '@/components/icons/book-open-icon'
-import { ClockIcon } from '@/components/icons/clock-icon'
-import { CodeSquareIcon } from '@/components/icons/code-square-icon'
-import { CpuIcon } from '@/components/icons/cpu-icon'
-import { SparklesIcon } from '@/components/icons/sparkles-icon'
+import { AiAgentIcon } from '@/components/icons/framer/ai-agent-icon'
+import { AiAssistantIcon } from '@/components/icons/framer/ai-assistant-icon'
+import { AiWorkflowsIcon } from '@/components/icons/framer/ai-workflows-icon'
+import { ApiReferenceIcon } from '@/components/icons/framer/api-reference-icon'
+import { ChangelogIcon } from '@/components/icons/framer/changelog-icon'
+import { HelpCenterIcon } from '@/components/icons/framer/help-center-icon'
+import { ProductGuidesIcon } from '@/components/icons/framer/product-guides-icon'
 
 const TABS = [
-  { label: 'Product Guides', Icon: BookOpenIcon, src: '/img/tabs/product-guides.avif' },
-  { label: 'API Reference', Icon: CodeSquareIcon, src: '/img/tabs/api-reference.png' },
-  { label: 'Help Center', Icon: BookIcon, src: '/img/tabs/help-center.avif' },
-  { label: 'Changelog', Icon: ClockIcon, src: '/img/tabs/changelog.avif' },
-  { label: 'AI Assistant', Icon: SparklesIcon, src: '/img/tabs/ai-assistant.png' },
-  { label: 'AI Agent', Icon: CpuIcon, src: '/img/tabs/ai-agent.avif' },
+  { label: 'Product Guides', Icon: ProductGuidesIcon, src: '/img/tabs/product-guides.avif' },
+  { label: 'API Reference', Icon: ApiReferenceIcon, src: '/img/tabs/api-reference.png' },
+  { label: 'Help Center', Icon: HelpCenterIcon, src: '/img/tabs/help-center.avif' },
+  { label: 'Changelog', Icon: ChangelogIcon, src: '/img/tabs/changelog.avif' },
+  { label: 'AI Assistant', Icon: AiAssistantIcon, src: '/img/tabs/ai-assistant.png' },
+  { label: 'AI Agent', Icon: AiAgentIcon, src: '/img/tabs/ai-agent.avif' },
   { label: 'AI Workflows', Icon: AiWorkflowsIcon, src: '/img/tabs/ai-workflows.avif' },
 ]
 
 export function ProductTabs() {
   return (
-    <ElTabGroup className="flex w-full flex-col items-center gap-8 rounded-3xl bg-mauve-950/2.5 p-4 ring-1 ring-mauve-950/5 sm:p-6 dark:bg-white/5 dark:ring-white/10">
+    <ElTabGroup className="flex w-full flex-col items-center gap-8 rounded-4xl bg-card p-4 ring-1 ring-card-border sm:p-6 dark:bg-white/5 dark:ring-white/10">
       {/* Tab bar — below xl only the selected tab shows its label; tab 0 is pre-selected in SSR markup so there is no hydration flash */}
       <div className="max-w-full overflow-x-auto">
         <ElTabList role="tablist" className="flex items-center gap-1">

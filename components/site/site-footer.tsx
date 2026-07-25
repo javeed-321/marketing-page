@@ -1,15 +1,17 @@
-import { GitHubIcon } from '@/components/icons/social/github-icon'
-import { InstagramIcon } from '@/components/icons/social/instagram-icon'
-import { LinkedInIcon } from '@/components/icons/social/linkedin-icon'
-import { SlackIcon } from '@/components/icons/social/slack-icon'
-import { XIcon } from '@/components/icons/social/x-icon'
-import { YouTubeIcon } from '@/components/icons/social/youtube-icon'
+import { SocialGitHubIcon } from '@/components/icons/framer/social-github-icon'
+import { SocialInstagramIcon } from '@/components/icons/framer/social-instagram-icon'
+import { SocialLinkedInIcon } from '@/components/icons/framer/social-linkedin-icon'
+import { SocialSlackIcon } from '@/components/icons/framer/social-slack-icon'
+import { SocialXIcon } from '@/components/icons/framer/social-x-icon'
+import { SocialYouTubeIcon } from '@/components/icons/framer/social-youtube-icon'
 import {
   FooterCategory,
   FooterLink,
   FooterWithNewsletterFormCategoriesAndSocialIcons,
   SocialLink,
 } from '@/components/sections/footer-with-newsletter-form-categories-and-social-icons'
+import { FooterWatermark } from '@/components/site/footer-watermark'
+import { LogoWordmark } from '@/components/site/logo-wordmark'
 
 const FOOTER = {
   Resources: [
@@ -38,6 +40,15 @@ const FOOTER = {
   ],
 }
 
+const SOCIALS = [
+  { name: 'GitHub', href: 'https://github.com/documentation-ai', Icon: SocialGitHubIcon },
+  { name: 'Slack', href: '#', Icon: SocialSlackIcon },
+  { name: 'X', href: 'https://x.com/documentation_i', Icon: SocialXIcon },
+  { name: 'LinkedIn', href: '#', Icon: SocialLinkedInIcon },
+  { name: 'Instagram', href: 'https://www.instagram.com/documentation_ai/', Icon: SocialInstagramIcon },
+  { name: 'YouTube', href: 'https://www.youtube.com/@DocumentationAI', Icon: SocialYouTubeIcon },
+]
+
 // Section 10 — Footer
 export function SiteFooter() {
   return (
@@ -46,41 +57,19 @@ export function SiteFooter() {
       cta={
         <div className="flex max-w-sm flex-col gap-6">
           <div className="flex flex-col gap-3">
-            {/* eslint-disable-next-line @next/next/no-img-element -- static brand svg */}
-            <img src="/img/documentation-logo.svg" alt="Documentation.AI" className="h-8 w-auto self-start" />
-            <p className="text-sm/7 text-mauve-500">©2026 Documentation.AI</p>
-            <p className="text-sm/7 text-mauve-700 dark:text-mauve-400">
+            <LogoWordmark className="h-8 w-auto self-start" />
+            <p className="text-[13px]/[18px] text-mauve-500">©2026 Documentation.AI</p>
+            <p className="text-[13px]/5 text-mauve-700 dark:text-mauve-400">
               AI native documentation and knowledge platform to create and maintain world class documentation built
               for both humans and AI
             </p>
           </div>
           <div className="flex items-center gap-5">
-            <SocialLink href="https://github.com/documentation-ai" name="GitHub" className="text-mauve-500 hover:text-mauve-950">
-              <GitHubIcon />
-            </SocialLink>
-            <SocialLink href="#" name="Slack" className="text-mauve-500 hover:text-mauve-950">
-              <SlackIcon />
-            </SocialLink>
-            <SocialLink href="https://x.com/documentation_i" name="X" className="text-mauve-500 hover:text-mauve-950">
-              <XIcon />
-            </SocialLink>
-            <SocialLink href="#" name="LinkedIn" className="text-mauve-500 hover:text-mauve-950">
-              <LinkedInIcon />
-            </SocialLink>
-            <SocialLink
-              href="https://www.instagram.com/documentation_ai/"
-              name="Instagram"
-              className="text-mauve-500 hover:text-mauve-950"
-            >
-              <InstagramIcon />
-            </SocialLink>
-            <SocialLink
-              href="https://www.youtube.com/@DocumentationAI"
-              name="YouTube"
-              className="text-mauve-500 hover:text-mauve-950"
-            >
-              <YouTubeIcon />
-            </SocialLink>
+            {SOCIALS.map(({ name, href, Icon }) => (
+              <SocialLink key={name} href={href} name={name}>
+                <Icon className="size-5" />
+              </SocialLink>
+            ))}
           </div>
         </div>
       }
@@ -97,7 +86,7 @@ export function SiteFooter() {
           ))}
         </>
       }
-      watermark="Documentation.AI"
+      watermark={<FooterWatermark />}
     />
   )
 }

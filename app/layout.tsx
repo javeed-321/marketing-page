@@ -5,6 +5,7 @@ import {
   NavbarLogo,
   NavbarWithLogoActionsAndCenteredLinks,
 } from '@/components/sections/navbar-with-logo-actions-and-centered-links'
+import { LogoWordmark } from '@/components/site/logo-wordmark'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Inter } from 'next/font/google'
 import './globals.css'
@@ -34,8 +35,7 @@ export default function RootLayout({
             id="navbar"
             logo={
               <NavbarLogo href="/" className="items-center">
-                {/* eslint-disable-next-line @next/next/no-img-element -- static brand svg */}
-                <img src="/img/documentation-logo.svg" alt="Documentation.AI" className="h-10 w-auto" />
+                <LogoWordmark className="h-8 w-auto" />
               </NavbarLogo>
             }
             links={

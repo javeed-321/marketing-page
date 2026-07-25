@@ -5,8 +5,8 @@ export function Text({ children, className, size = 'md', ...props }: ComponentPr
   return (
     <div
       className={clsx(
-        size === 'md' && 'text-base/7',
-        size === 'lg' && 'text-lg/8',
+        size === 'md' && 'text-base/6',
+        size === 'lg' && 'text-lg/normal',
         'text-mauve-700 dark:text-mauve-400',
         className,
       )}
