@@ -8,8 +8,8 @@ import { ArrowNarrowRightIcon } from '../icons/arrow-narrow-right-icon'
 export function FooterCategory({ title, children, ...props }: { title: ReactNode } & ComponentProps<'div'>) {
   return (
     <div {...props}>
-      <h3>{title}</h3>
-      <ul role="list" className="mt-2 flex flex-col gap-2">
+      <h3 className="font-normal text-mauve-500">{title}</h3>
+      <ul role="list" className="mt-3 flex flex-col gap-2">
         {children}
       </ul>
     </div>
@@ -38,7 +38,7 @@ export function SocialLink({
       href={href}
       target="_blank"
       aria-label={name}
-      className={clsx('text-mauve-950 *:size-6 dark:text-white', className)}
+      className={clsx('text-mauve-500 transition-colors *:size-5 hover:text-mauve-950 dark:text-mauve-400 dark:hover:text-white', className)}
       {...props}
     />
   )
@@ -81,17 +81,24 @@ export function FooterWithNewsletterFormCategoriesAndSocialIcons({
   links,
   fineprint,
   socialLinks,
+  watermark,
   className,
   ...props
 }: {
   cta: ReactNode
   links: ReactNode
-  fineprint: ReactNode
+  fineprint?: ReactNode
   socialLinks?: ReactNode
+  watermark?: ReactNode
 } & ComponentProps<'footer'>) {
   return (
     <footer className={clsx('pt-16', className)} {...props}>
-      <div className="bg-mauve-950/2.5 py-16 text-mauve-950 dark:bg-white/5 dark:text-white">
+      <div
+        className={clsx(
+          'overflow-hidden bg-mauve-950/2.5 pt-16 text-mauve-950 dark:bg-white/5 dark:text-white',
+          !watermark && 'pb-16',
+        )}
+      >
         <Container className="flex flex-col gap-16">
           <div className="grid grid-cols-1 gap-x-6 gap-y-16 text-sm/7 lg:grid-cols-2">
             {cta}
@@ -99,11 +106,32 @@ export function FooterWithNewsletterFormCategoriesAndSocialIcons({
               {links}
             </nav>
           </div>
-          <div className="flex items-center justify-between gap-10 text-sm/7">
-            <div className="text-mauve-600 dark:text-mauve-500">{fineprint}</div>
-            {socialLinks && <div className="flex items-center gap-4 sm:gap-10">{socialLinks}</div>}
-          </div>
+          {(fineprint || socialLinks) && (
+            <div className="flex items-center justify-between gap-10 text-sm/7">
+              <div className="text-mauve-600 dark:text-mauve-500">{fineprint}</div>
+              {socialLinks && <div className="flex items-center gap-4 sm:gap-10">{socialLinks}</div>}
+            </div>
+          )}
         </Container>
+        {watermark && (
+          <div aria-hidden="true" className="pointer-events-none mt-12 overflow-hidden select-none">
+            {/* SVG so the wordmark always scales to the container width (never overflows
+              * horizontally) and is clipped along the bottom, matching documentation.ai. */}
+            <svg viewBox="0 0 1120 62" width="100%" preserveAspectRatio="xMidYMin meet" className="block w-full">
+              <text
+                x="560"
+                y="86"
+                textAnchor="middle"
+                textLength="1060"
+                lengthAdjust="spacingAndGlyphs"
+                style={{ fontSize: '120px' }}
+                className="fill-mauve-950/6 font-display font-medium dark:fill-white/5"
+              >
+                {watermark}
+              </text>
+            </svg>
+          </div>
+        )}
       </div>
     </footer>
   )

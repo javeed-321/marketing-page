@@ -6,7 +6,14 @@ import {
   NavbarWithLogoActionsAndCenteredLinks,
 } from '@/components/sections/navbar-with-logo-actions-and-centered-links'
 import type { Metadata } from 'next'
+import { Geist, Geist_Mono, Inter } from 'next/font/google'
 import './globals.css'
+
+// Self-hosted fonts (no runtime Google Fonts dependency, no flash).
+// Geist headings + Geist Mono badge + Inter body → matches documentation.ai.
+const geist = Geist({ subsets: ['latin'], variable: '--font-geist', display: 'swap' })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
+const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono', display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'Documentation.AI — The AI Documentation Platform',
@@ -20,19 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en" className={`${geist.variable} ${inter.variable} ${geistMono.variable}`}>
       <body>
         <>
           <NavbarWithLogoActionsAndCenteredLinks

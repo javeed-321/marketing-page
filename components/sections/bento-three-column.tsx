@@ -27,8 +27,8 @@ export function BentoCard({
         </div>
       )}
       <div className="flex flex-col gap-2">
-        <h3 className="text-base/6 font-semibold text-mauve-950 dark:text-white">{headline}</h3>
-        <div className="flex flex-col gap-4 text-sm/6 text-mauve-700 dark:text-mauve-400">{subheadline}</div>
+        <h3 className="text-lg/8 font-medium text-mauve-950 dark:text-white">{headline}</h3>
+        <div className="flex flex-col gap-4 text-base/7 text-mauve-700 dark:text-mauve-400">{subheadline}</div>
       </div>
     </div>
   )
