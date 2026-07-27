@@ -42,7 +42,7 @@ export function FinalCta({
       }
       cta={
         (primaryCta || secondaryCta) && (
-          <div className="flex items-center gap-4">
+          <>
             {primaryCta && (
               <ButtonLink href={primaryCta.href} size="lg">
                 {primaryCta.label}
@@ -54,7 +54,7 @@ export function FinalCta({
                 {secondaryCta.label}
               </PlainButtonLink>
             )}
-          </div>
+          </>
         )
       }
       {...props}

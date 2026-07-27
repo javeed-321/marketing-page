@@ -1,6 +1,7 @@
 import { clsx } from 'clsx/lite'
 import type { ComponentProps, ReactNode } from 'react'
 
+import { ButtonGroup } from '../elements/button'
 import { Container } from '../elements/container'
 import { Heading } from '../elements/heading'
 import { Text } from '../elements/text'
@@ -45,7 +46,11 @@ export function HeroCenteredTall({
           {subheadline}
         </Text>
 
-        {cta && <div className="mt-10 flex flex-wrap items-center justify-center gap-3">{cta}</div>}
+        {cta && (
+          <ButtonGroup align="center" className="mt-10 gap-x-3">
+            {cta}
+          </ButtonGroup>
+        )}
       </div>
 
       {/* Outside the max-w-2xl copy column so wide visuals are not squeezed. */}

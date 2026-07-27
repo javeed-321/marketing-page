@@ -334,7 +334,7 @@ export default function Page() {
           <p>Chat to someone on our sales team, who will make promises about our roadmap that we won't keep.</p>
         }
         cta={
-          <div className="flex items-center gap-4">
+          <>
             <ButtonLink href="#" size="lg">
               Chat with us
             </ButtonLink>
@@ -342,7 +342,7 @@ export default function Page() {
             <PlainButtonLink href="#" size="lg">
               Book a demo <ChevronIcon />
             </PlainButtonLink>
-          </div>
+          </>
         }
       />
     </>

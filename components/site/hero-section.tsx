@@ -55,7 +55,7 @@ export function HeroSection({
       subheadline={<Paragraphs>{subheadline}</Paragraphs>}
       cta={
         (primaryCta || secondaryCta) && (
-          <div className="flex items-center gap-3">
+          <>
             {primaryCta && (
               <ButtonLink href={primaryCta.href} size="lg">
                 {primaryCta.label}
@@ -67,7 +67,7 @@ export function HeroSection({
                 {secondaryCta.label}
               </SoftButtonLink>
             )}
-          </div>
+          </>
         )
       }
       demo={demo}

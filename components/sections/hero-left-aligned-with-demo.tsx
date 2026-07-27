@@ -1,5 +1,6 @@
 import { clsx } from 'clsx/lite'
 import type { ComponentProps, ReactNode } from 'react'
+import { ButtonGroup } from '../elements/button'
 import { Container } from '../elements/container'
 import { Heading } from '../elements/heading'
 import { Text } from '../elements/text'
@@ -31,7 +32,7 @@ export function HeroLeftAlignedWithDemo({
             <Text size="lg" className="flex max-w-3xl flex-col gap-4">
               {subheadline}
             </Text>
-            {cta}
+            {cta && <ButtonGroup className="gap-x-3">{cta}</ButtonGroup>}
           </div>
           {demo}
         </div>

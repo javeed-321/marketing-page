@@ -11,6 +11,27 @@ const sizes = {
   lg: 'px-4 py-2',
 }
 
+const alignments = {
+  start: 'justify-start',
+  center: 'justify-center',
+}
+
+/**
+ * The row a section's call-to-action buttons sit in. Sections compose this
+ * instead of hand-rolling a flex div, so every CTA row wraps the same way
+ * instead of overflowing its card on narrow viewports (the buttons themselves
+ * are `shrink-0`, so wrapping is what keeps them inside their container).
+ */
+export function ButtonGroup({
+  align = 'start',
+  className,
+  ...props
+}: { align?: keyof typeof alignments } & ComponentProps<'div'>) {
+  return (
+    <div className={clsx('flex flex-wrap items-center gap-x-4 gap-y-3', alignments[align], className)} {...props} />
+  )
+}
+
 export function Button({
   size = 'md',
   type = 'button',

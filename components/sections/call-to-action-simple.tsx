@@ -1,5 +1,6 @@
 import { clsx } from 'clsx/lite'
 import type { ComponentProps, ReactNode } from 'react'
+import { ButtonGroup } from '../elements/button'
 import { Container } from '../elements/container'
 import { Eyebrow } from '../elements/eyebrow'
 import { Subheading } from '../elements/subheading'
@@ -28,7 +29,7 @@ export function CallToActionSimple({
           </div>
           {subheadline && <Text className="flex max-w-3xl flex-col gap-4 text-pretty">{subheadline}</Text>}
         </div>
-        {cta}
+        {cta && <ButtonGroup>{cta}</ButtonGroup>}
       </Container>
     </section>
   )

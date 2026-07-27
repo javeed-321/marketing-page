@@ -1,5 +1,6 @@
 import { clsx } from 'clsx/lite'
 import type { ComponentProps, ReactNode } from 'react'
+import { ButtonGroup } from '../elements/button'
 import { Container } from '../elements/container'
 import { Subheading } from '../elements/subheading'
 import { Text } from '../elements/text'
@@ -20,10 +21,10 @@ export function CallToActionSimpleCentered({
   return (
     <section className={clsx('py-16', className)} {...props}>
       <Container>
-        <div className="flex flex-col items-center gap-10 rounded-3xl bg-card px-6 py-20 sm:px-16 dark:bg-white/5">
-          <Subheading className="max-w-4xl text-center">{headline}</Subheading>
-          <div className="flex flex-col items-center gap-5">
-            {cta}
+        <div className="flex flex-col items-center gap-8 rounded-3xl bg-card px-5 py-14 sm:gap-10 sm:px-16 sm:py-20 dark:bg-white/5">
+          <Subheading className="max-w-4xl text-center wrap-break-word">{headline}</Subheading>
+          <div className="flex w-full flex-col items-center gap-5">
+            {cta && <ButtonGroup align="center">{cta}</ButtonGroup>}
             {subheadline && (
               <Text className="flex max-w-3xl flex-col gap-4 text-center text-pretty">{subheadline}</Text>
             )}
