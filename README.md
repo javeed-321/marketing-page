@@ -1,10 +1,39 @@
-Marketing-site clone of [documentation.ai](https://documentation.ai), built with Next.js (App Router), Tailwind CSS v4, and the Tailwind Plus "Oatmeal" template. All components are React **server components** (no `'use client'`).
+Marketing-site clone of [documentation.ai](https://documentation.ai), built with Next.js (App Router), Tailwind CSS v4, and the Tailwind Plus "Oatmeal" template. Everything is a React server component except two interactive leaves — `product-tabs` and `logo-marquee`, which are marked `'use client'`.
+
+## Content is data, components are layout
+
+Every section in `components/site/` follows the same three-part shape, in this order:
+
+```tsx
+export type FooContent = { headline: string; subheadline: Prose; items: Item[] }   // 1. the contract
+export const FOO_CONTENT: FooContent = { … }                                       // 2. the words
+export function Foo({ content }: { content: FooContent } & …) { … }                // 3. the layout
+```
+
+The component holds **no copy of its own** — no default headline, no default body text. It
+destructures `content` and renders it. `app/page.tsx` wires the two together:
+
+```tsx
+<Foo content={FOO_CONTENT} />
+```
+
+So reusing a section on another page means declaring a second `FooContent` object and passing
+that — never editing the component. Rules that keep this honest:
+
+- Content fields are **plain data** (`string`, `string[]`, `ComponentType` for icons). Sizing
+  like `size-5` is styling and stays in the component, which is why content passes `Icon:
+  McpIcon`, not `<McpIcon className="size-5" />`.
+- Multi-paragraph body copy is typed `Prose` (`string | string[]`) and rendered by
+  `<Paragraphs>` from `elements/text.tsx` — one `<p>` per entry.
+- `content` must be omitted from any inherited prop type
+  (`Omit<ComponentProps<'section'>, 'content'>`) — React's HTML typings already define a global
+  `content` attribute, and the intersection otherwise collapses to `never`.
 
 ## Project structure — where to change what
 
 ```
 app/
-  page.tsx            Homepage — just stacks the section components (order lives here)
+  page.tsx            Homepage — stacks the sections and feeds each its *_CONTENT object
   layout.tsx          Navbar + footer shell, fonts (Geist / Geist Mono / Inter)
   globals.css         Design tokens (colors, fonts), FAQ animation, light-mode lock
   about|pricing|privacy-policy|404/   Secondary pages (template blocks)
@@ -18,7 +47,8 @@ components/
                       (+ logo-wordmark, footer-watermark)
   sections/           Reusable template blocks (bento grids, hero, FAQ, footer…)
                       shared by all pages — edit these only for cross-page changes
-  elements/           Primitives: Button, Container, Heading, Subheading, Text…
+  elements/           Primitives: Button, Container, Heading, Subheading, Text/Paragraphs…
+                      Also the shared content types: CtaLink (button.tsx), Prose (text.tsx)
   icons/
     framer/           ★ EXACT icons extracted from documentation.ai (tabs, cards,
                       socials). Add new site icons here.

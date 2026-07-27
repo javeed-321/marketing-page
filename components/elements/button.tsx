@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { clsx } from 'clsx/lite'
 import type { ComponentProps } from 'react'
 
+/** A call-to-action button authored as data: the visible label and where it points. */
+export type CtaLink = { label: string; href: string }
+
 const sizes = {
   md: 'px-3 py-2',
   lg: 'px-3.5 py-2',

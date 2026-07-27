@@ -1,15 +1,31 @@
 import { clsx } from 'clsx/lite'
-import type { ComponentProps, ReactNode } from 'react'
+import type { ComponentProps, ComponentType, ReactNode } from 'react'
 import { Section } from '../elements/section'
 
-type Featured = {
+/** Large top card. Provide either `img` (rendered as a cover image) or `media` (arbitrary JSX). */
+export type Featured = {
   title: ReactNode
   desc: ReactNode
   img?: string
   media?: ReactNode
   variant?: 'default' | 'red'
 }
-type IconCard = { icon: ReactNode; title: ReactNode; desc: ReactNode }
+export type IconCard = { icon: ReactNode; title: ReactNode; desc: ReactNode }
+
+/**
+ * An icon card authored as data: the icon *component*, not a sized element.
+ * Content objects use this so icon sizing stays a styling decision of the block.
+ */
+export type IconCardData = {
+  Icon: ComponentType<ComponentProps<'svg'>>
+  title: string
+  desc: string
+}
+
+/** Adapts {@link IconCardData} to a renderable {@link IconCard} at the block's icon size. */
+export function toIconCard({ Icon, title, desc }: IconCardData): IconCard {
+  return { icon: <Icon className="size-5" />, title, desc }
+}
 
 // Themed adaptation of the Tailwind UI "two-row bento with three-column second row"
 // block: 2 large image cards on top, 3 icon cards below. Neutral (mauve) theme.

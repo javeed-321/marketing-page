@@ -1,32 +1,77 @@
-import { AnnouncementBadge } from '@/components/elements/announcement-badge'
-import { ButtonLink, SoftButtonLink } from '@/components/elements/button'
-import { HeroCenteredWithDemo } from '@/components/sections/hero-centered-with-demo'
-import { ProductTabs } from '@/components/site/product-tabs'
+import type { ComponentProps, ReactNode } from 'react'
 
-export function HeroSection() {
+import { AnnouncementBadge } from '@/components/elements/announcement-badge'
+import { ButtonLink, SoftButtonLink, type CtaLink } from '@/components/elements/button'
+import { Paragraphs, type Prose } from '@/components/elements/text'
+import { HeroCenteredWithDemo } from '@/components/sections/hero-centered-with-demo'
+
+/** Everything the hero *says*. Plain data — no JSX, no styling. */
+export type HeroContent = {
+  /** Announcement pill above the headline. Omit the key to hide it. */
+  badge?: { text: string; href?: string }
+  headline: string
+  subheadline: Prose
+  /** Solid button. Omit the key to hide it. */
+  primaryCta?: CtaLink
+  /** Soft (light-filled) button. Omit the key to hide it. */
+  secondaryCta?: CtaLink
+}
+
+/** Homepage hero copy — the only place these words live. */
+export const HERO_CONTENT: HeroContent = {
+  badge: {
+    text: 'Knowledge Infrastructure For AI Agents And Humans',
+    href: '#',
+  },
+  headline: 'The AI Documentation Platform',
+  subheadline:
+    'Create self-updating product docs, knowledge bases, API references, and help centers. Make knowledge easy for AI agents and humans to access. Reduce support and accelerate onboarding.',
+  primaryCta: { label: 'Start for Free', href: 'https://dashboard.documentation.ai/' },
+  secondaryCta: { label: 'Book a Demo', href: 'https://documentation.ai/get-a-demo' },
+}
+
+// Section 0 — Hero.
+// Presentational only: it owns layout and styling, `content` owns every word.
+// To use it on another page, pass that page's content object — don't edit this file.
+export function HeroSection({
+  content,
+  demo,
+  ...props
+}: {
+  content: HeroContent
+  /** Visual below the copy, e.g. `<ProductTabs />`. Omit for a copy-only hero. */
+  demo?: ReactNode
+} & Omit<
+  ComponentProps<typeof HeroCenteredWithDemo>,
+  'content' | 'eyebrow' | 'headline' | 'subheadline' | 'cta' | 'demo'
+>) {
+  const { badge, headline, subheadline, primaryCta, secondaryCta } = content
+
   return (
     <HeroCenteredWithDemo
       id="hero"
-      eyebrow={<AnnouncementBadge href="#" text="Knowledge Infrastructure For AI Agents And Humans" />}
-      headline="The AI Documentation Platform"
-      subheadline={
-        <p>
-          Create self-updating product docs, knowledge bases, API references, and help centers. Make knowledge easy
-          for AI agents and humans to access. Reduce support and accelerate onboarding.
-        </p>
-      }
+      eyebrow={badge && <AnnouncementBadge text={badge.text} href={badge.href} />}
+      headline={headline}
+      subheadline={<Paragraphs>{subheadline}</Paragraphs>}
       cta={
-        <div className="flex items-center justify-center gap-3">
-          <ButtonLink href="https://dashboard.documentation.ai/" size="lg">
-            Start for Free
-          </ButtonLink>
+        (primaryCta || secondaryCta) && (
+          <div className="flex items-center justify-center gap-3">
+            {primaryCta && (
+              <ButtonLink href={primaryCta.href} size="lg">
+                {primaryCta.label}
+              </ButtonLink>
+            )}
 
-          <SoftButtonLink href="https://documentation.ai/get-a-demo" size="lg">
-            Book a Demo
-          </SoftButtonLink>
-        </div>
+            {secondaryCta && (
+              <SoftButtonLink href={secondaryCta.href} size="lg">
+                {secondaryCta.label}
+              </SoftButtonLink>
+            )}
+          </div>
+        )
       }
-      demo={<ProductTabs />}
+      demo={demo}
+      {...props}
     />
   )
 }

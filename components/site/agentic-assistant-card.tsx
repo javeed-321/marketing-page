@@ -16,7 +16,27 @@ function Bar({ className }: { className?: string }) {
   return <span className={`block h-2.5 rounded-full bg-white/25 ${className ?? ''}`} />
 }
 
-export function AgenticAssistantCard() {
+/** Everything the mockup *says*. Plain data — no JSX, no styling. */
+export type AgenticAssistantContent = {
+  /** The user's question bubble. */
+  question: string
+  /** The agent's "reading…" trace lines, one per entry. */
+  steps: string[]
+  /** Placeholder text in the ask input. */
+  placeholder: string
+}
+
+/** Homepage copy for the mockup — the only place these words live. */
+export const AGENTIC_ASSISTANT_CONTENT: AgenticAssistantContent = {
+  question: 'How do I manage active workflows?',
+  steps: ['Reading documentation...', 'Reading workflows page...'],
+  placeholder: 'Ask about these docs...',
+}
+
+// Presentational only: it owns layout and styling, `content` owns every word.
+export function AgenticAssistantCard({ content }: { content: AgenticAssistantContent }) {
+  const { question, steps, placeholder } = content
+
   return (
     <div className="flex flex-col gap-5 p-8 pb-0">
       {/* skeleton context the assistant is reading */}
@@ -28,21 +48,17 @@ export function AgenticAssistantCard() {
 
       {/* user question bubble */}
       <div className="flex justify-end">
-        <span className="rounded-full bg-white/85 px-4 py-2 text-sm font-medium text-red-600">
-          How do I manage active workflows?
-        </span>
+        <span className="rounded-full bg-white/85 px-4 py-2 text-sm font-medium text-red-600">{question}</span>
       </div>
 
       {/* agent reading trace */}
       <div className="flex flex-col gap-2 text-sm text-white/80">
-        <span className="flex items-center gap-2">
-          <SearchGlyph />
-          Reading documentation...
-        </span>
-        <span className="flex items-center gap-2">
-          <SearchGlyph />
-          Reading workflows page...
-        </span>
+        {steps.map((step, i) => (
+          <span key={i} className="flex items-center gap-2">
+            <SearchGlyph />
+            {step}
+          </span>
+        ))}
       </div>
 
       {/* streaming answer */}
@@ -56,7 +72,7 @@ export function AgenticAssistantCard() {
 
       {/* ask input */}
       <div className="mt-1 flex items-center justify-between gap-3 rounded-full bg-white px-5 py-3">
-        <span className="text-sm text-mauve-400">Ask about these docs...</span>
+        <span className="text-sm text-mauve-400">{placeholder}</span>
         <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-mauve-950 text-white">
           <ArrowNarrowRightIcon className="size-4" />
         </span>

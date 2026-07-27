@@ -41,6 +41,17 @@
   --color-mauve-800: #5b4f4b;
   --color-mauve-900: #473c39;
   --color-mauve-950: #09090b;
+
+  /* Logo-cloud marquee. The track holds two copies of the list, so one full cycle
+   * is half the track width plus half a gap (gap-10 = 40px) — 2640px. At 60s that's
+   * a calm ~44px/s. LogoMarquee retimes this animation on hover (see that component). */
+  --animate-marquee: marquee 60s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(calc(-50% - 1.25rem));
+    }
+  }
 }
 
 @layer components {
