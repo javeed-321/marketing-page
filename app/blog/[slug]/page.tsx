@@ -4,10 +4,10 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
 import { Container } from '@/components/elements/container'
-import { Document } from '@/components/elements/document'
 import { Heading } from '@/components/elements/heading'
 import { Text } from '@/components/elements/text'
 import { JsonLd } from '@/components/json-ld'
+import { ArticleSections } from '@/components/site/article-sections'
 import { formatDate, getAuthorForPost, getPostBySlug, getPublishedPosts } from '@/lib/posts'
 import { absoluteUrl, organizationId, siteConfig, websiteId } from '@/lib/site'
 
@@ -132,16 +132,11 @@ export default async function Page({ params }: Props) {
           />
         )}
 
-        <Document variant="article" className="mt-10">
-          {post.sections.map((section, i) => (
-            <section key={i}>
-              {section.heading && <h2>{section.heading}</h2>}
-              {section.paragraphs.map((paragraph, j) => (
-                <p key={j}>{paragraph}</p>
-              ))}
-            </section>
-          ))}
-        </Document>
+        {/* No `Document` wrapper here — each section applies its own styling, and
+            Document's descendant selectors would restyle every block's internals. */}
+        <div className="mt-10">
+          <ArticleSections sections={post.sections} />
+        </div>
       </article>
     </Container>
   )

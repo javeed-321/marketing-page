@@ -1,13 +1,15 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import type { Metadata } from 'next'
 
-import { Container } from '@/components/elements/container'
-import { Heading } from '@/components/elements/heading'
 import { Text } from '@/components/elements/text'
 import { JsonLd } from '@/components/json-ld'
+import { BlogThreeColumnWithImages, type BlogPostCard } from '@/components/sections/blog-three-column-with-images'
 import { formatDate, getAuthorForPost, getPublishedPosts } from '@/lib/posts'
 import { absoluteUrl, organizationId, siteConfig, websiteId } from '@/lib/site'
+
+// Used when a post has no `cover` / an author has no `avatar` — the block's <img>
+// tags have no empty-src branch, so both fields must always resolve to something.
+const FALLBACK_COVER = '/img/photos/1.webp'
+const FALLBACK_AVATAR = '/img/avatars/10-size-160.webp'
 
 export const metadata: Metadata = {
   title: `Blog — ${siteConfig.name}`,
@@ -46,59 +48,36 @@ export default function Page() {
     })),
   }
 
+  // Map our Post/Author records onto the block's expected card shape.
+  const cards: BlogPostCard[] = posts.map((post) => {
+    const author = getAuthorForPost(post)
+    return {
+      id: post.slug,
+      title: post.title,
+      href: post.permalink,
+      description: post.excerpt,
+      imageUrl: post.cover ?? FALLBACK_COVER,
+      date: formatDate(post.date),
+      datetime: post.date,
+      category: { title: post.tags[0] ?? 'Documentation', href: '/blog' },
+      author: {
+        name: author.name,
+        role: author.role ?? '',
+        href: author.permalink,
+        imageUrl: author.avatar ?? FALLBACK_AVATAR,
+      },
+    }
+  })
+
   return (
-    <Container className="py-16 sm:py-24">
+    <>
       <JsonLd data={jsonLd} />
 
-      <header className="flex max-w-2xl flex-col gap-6">
-        <Heading>Blog</Heading>
-        <Text size="lg" className="text-pretty">
-          {siteConfig.blogDescription}
-        </Text>
-      </header>
-
       {posts.length === 0 ? (
-        <Text className="mt-16">No posts published yet.</Text>
+        <Text className="py-24 text-center">No posts published yet.</Text>
       ) : (
-        <div className="mt-12 divide-y divide-card-border border-t border-card-border sm:mt-16">
-          {posts.map((post) => {
-            const author = getAuthorForPost(post)
-            return (
-              <article key={post.slug} className="group grid gap-6 py-8 sm:grid-cols-[1fr_auto] sm:gap-10">
-                <div className="flex flex-col gap-3">
-                  <Link href={post.permalink} className="flex flex-col gap-3">
-                    <p className="text-sm/6 text-mauve-500">
-                      {formatDate(post.date)} · {post.readingTime} min read
-                    </p>
-                    <h2 className="font-display text-xl/7 font-medium tracking-[-0.02em] text-balance text-mauve-950 transition-colors group-hover:text-red-500 dark:text-white">
-                      {post.title}
-                    </h2>
-                    <Text className="line-clamp-2 text-pretty">{post.excerpt}</Text>
-                  </Link>
-                  <p className="text-sm/6 text-mauve-500">
-                    Written by{' '}
-                    <Link href={author.permalink} className="font-medium transition-colors hover:text-red-500">
-                      {author.name}
-                    </Link>
-                  </p>
-                </div>
-
-                {post.cover && (
-                  <Link href={post.permalink} className="max-sm:hidden">
-                    <Image
-                      src={post.cover}
-                      alt=""
-                      width={200}
-                      height={112}
-                      className="aspect-video w-50 rounded-lg border border-card-border bg-card object-cover"
-                    />
-                  </Link>
-                )}
-              </article>
-            )
-          })}
-        </div>
+        <BlogThreeColumnWithImages headline="From the blog" subheadline={siteConfig.blogDescription} posts={cards} />
       )}
-    </Container>
+    </>
   )
 }
