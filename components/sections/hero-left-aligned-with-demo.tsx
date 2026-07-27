@@ -22,7 +22,7 @@ export function HeroLeftAlignedWithDemo({
   footer?: ReactNode
 } & ComponentProps<'section'>) {
   return (
-    <section className={clsx('pt-8 pb-16', className)} {...props}>
+    <section className={clsx('py-16', className)} {...props}>
       <Container className="flex flex-col gap-16">
         <div className="flex flex-col gap-32">
           <div className="flex flex-col items-start gap-6">

@@ -59,7 +59,10 @@ export default function RootLayout({
             id="navbar"
             logo={
               <NavbarLogo href="/" className="items-center">
-                <LogoWordmark className="h-8 w-auto" />
+                {/* 176x32 wordmark — at h-8 it claims 176px, more than half of a 336px
+                  * viewport's content box, which pushed the actions row into it.
+                  * h-6 = 132px on mobile; full size from sm up. */}
+                <LogoWordmark className="h-6 w-auto sm:h-8" />
               </NavbarLogo>
             }
             links={
@@ -81,7 +84,11 @@ export default function RootLayout({
                 <SoftButtonLink href="https://documentation.ai/get-a-demo" className="max-sm:hidden">
                   Book a Demo
                 </SoftButtonLink>
-                <ButtonLink href="https://dashboard.documentation.ai/">Start for Free</ButtonLink>
+                {/* Hidden on mobile like Login and Book a Demo above — even at h-6 the
+                  * wordmark leaves too little room. All three live in `mobileActions`. */}
+                <ButtonLink href="https://dashboard.documentation.ai/" className="max-sm:hidden">
+                  Start for Free
+                </ButtonLink>
               </>
             }
             mobileActions={

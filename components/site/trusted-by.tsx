@@ -55,8 +55,8 @@ export function TrustedBy({
   const { headline, subheadline, logos } = content
 
   return (
-    <section id="trusted-by" className={clsx('py-20', className)} {...props}>
-      <Container className="flex flex-col gap-10">
+    <section id="trusted-by" className={clsx('py-16', className)} {...props}>
+      <Container className="flex flex-col gap-10 sm:gap-16">
         <div className="flex flex-col text-center font-display text-2xl/[1.2] font-normal tracking-[-0.02em] text-pretty">
           <h2 className="text-mauve-950 dark:text-white">{headline}</h2>
           <p className="text-red-500">{subheadline}</p>

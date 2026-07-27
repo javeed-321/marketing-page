@@ -59,7 +59,7 @@ export function BeautifulDocs({
 
   return (
     <section id="beautiful-docs" className={clsx('py-16', className)} {...props}>
-      <Container className="flex flex-col gap-8">
+      <Container className="flex flex-col gap-10 sm:gap-16">
         <div className="flex max-w-2xl flex-col gap-6">
           <Subheading>{headline}</Subheading>
           <Text className="flex flex-col gap-4 text-pretty">

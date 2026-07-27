@@ -22,7 +22,11 @@ export function AnnouncementBadge({
   const content = (
     <>
       <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-red-500" />
-      <span className="truncate">{text}</span>
+      {/* Wraps on mobile, single-line from sm up — the template's behaviour. Plain
+        * `truncate` sets white-space:nowrap, whose min-content width becomes the whole
+        * string; that floors the flex item's `min-width:auto` and overrides max-w-full,
+        * stretching the hero column past the viewport (Main's overflow-clip then cuts it). */}
+      <span className="text-pretty sm:truncate">{text}</span>
     </>
   )
 

@@ -93,9 +93,8 @@ export function FooterWithNewsletterFormCategoriesAndSocialIcons({
   return (
     <footer className={clsx('pt-16', className)} {...props}>
       <div className="overflow-hidden bg-mauve-950/2.5 py-16 text-mauve-950 dark:bg-white/5 dark:text-white">
-        {/* Footer content spans a little wider than the body sections so the four link
-          * columns sit next to the brand block with room to breathe (no wasted gap). */}
-        <div className="mx-auto w-full max-w-2xl px-6 md:max-w-3xl lg:max-w-352 lg:px-10">
+        {/* Same measure as Container — the footer grid sits on the body's column. */}
+        <div className="mx-auto w-full max-w-2xl px-6 md:max-w-3xl lg:max-w-7xl lg:px-10">
           <div className="grid grid-cols-2 gap-x-8 gap-y-12 text-[13px]/5 sm:grid-cols-3 lg:grid-cols-[19rem_1fr_1fr_1fr_1fr]">
             <div className="col-span-2 sm:col-span-3 lg:col-span-1">{cta}</div>
             {/* display:contents so each category becomes a column of the grid above */}

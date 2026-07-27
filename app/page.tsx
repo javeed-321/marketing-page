@@ -17,12 +17,12 @@ export default function Page() {
   return (
     <>
       <HeroSection content={HERO_CONTENT} demo={<ProductTabs content={PRODUCT_TABS_CONTENT} />} />
-      {/* Vertical layout rails (1px, #F0EFEF) flanking the 75rem content column —
-          matches documentation.ai, which runs them from below the hero to the FAQ. */}
+      {/* Vertical layout rails (1px, #F0EFEF) flanking the content column — width must
+          track Container's lg:max-w-7xl, which is what they are drawn against. */}
       <div className="relative">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full max-w-300 -translate-x-1/2 border-x border-[#F0EFEF] lg:block dark:border-white/5"
+          className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full max-w-7xl -translate-x-1/2 border-x border-[#F0EFEF] lg:block dark:border-white/5"
         />
         <DocsThatKeepUp content={DOCS_THAT_KEEP_UP_CONTENT} />
         <AiDocumentationAgent content={AI_DOCUMENTATION_AGENT_CONTENT} />

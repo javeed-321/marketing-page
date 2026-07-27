@@ -21,7 +21,7 @@ export function CallToActionSimpleCentered({
     <section className={clsx('py-16', className)} {...props}>
       <Container>
         <div className="flex flex-col items-center gap-10 rounded-3xl bg-card px-6 py-20 sm:px-16 dark:bg-white/5">
-          <Subheading className="max-w-3xl text-center">{headline}</Subheading>
+          <Subheading className="max-w-4xl text-center">{headline}</Subheading>
           <div className="flex flex-col items-center gap-5">
             {cta}
             {subheadline && (

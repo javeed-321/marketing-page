@@ -3,7 +3,7 @@ import type { ComponentProps, ReactNode } from 'react'
 import { AnnouncementBadge } from '@/components/elements/announcement-badge'
 import { ButtonLink, SoftButtonLink, type CtaLink } from '@/components/elements/button'
 import { Paragraphs, type Prose } from '@/components/elements/text'
-import { HeroCenteredWithDemo } from '@/components/sections/hero-centered-with-demo'
+import { HeroLeftAlignedWithDemo } from '@/components/sections/hero-left-aligned-with-demo'
 
 /** Everything the hero *says*. Plain data — no JSX, no styling. */
 export type HeroContent = {
@@ -42,20 +42,20 @@ export function HeroSection({
   /** Visual below the copy, e.g. `<ProductTabs />`. Omit for a copy-only hero. */
   demo?: ReactNode
 } & Omit<
-  ComponentProps<typeof HeroCenteredWithDemo>,
+  ComponentProps<typeof HeroLeftAlignedWithDemo>,
   'content' | 'eyebrow' | 'headline' | 'subheadline' | 'cta' | 'demo'
 >) {
   const { badge, headline, subheadline, primaryCta, secondaryCta } = content
 
   return (
-    <HeroCenteredWithDemo
+    <HeroLeftAlignedWithDemo
       id="hero"
       eyebrow={badge && <AnnouncementBadge text={badge.text} href={badge.href} />}
       headline={headline}
       subheadline={<Paragraphs>{subheadline}</Paragraphs>}
       cta={
         (primaryCta || secondaryCta) && (
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center gap-3">
             {primaryCta && (
               <ButtonLink href={primaryCta.href} size="lg">
                 {primaryCta.label}
