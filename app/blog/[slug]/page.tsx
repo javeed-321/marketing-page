@@ -102,9 +102,9 @@ export default async function Page({ params }: Props) {
         <p className="mt-6 text-sm text-mauve-500">
           {formatDate(post.date)} · {post.metadata.readingTime} min read
         </p>
-        {/* 40px / weight 500 / -0.02em, measured from the live article h1 —
-            Tailwind's text-4xl + font-semibold read heavier than the original. */}
-        <h1 className="mt-3 font-display text-[2.25rem]/[1.2] font-medium tracking-[-0.02em] text-mauve-950 sm:text-[2.5rem]/[1.2]">
+        {/* 36px below 810px, 40px above — the live h1's own breakpoint.
+            Weight 500, -0.02em: text-4xl + font-semibold read heavier. */}
+        <h1 className="mt-3 font-display text-[2.25rem]/[1.2] font-medium tracking-[-0.02em] text-mauve-950 min-[810px]:text-[2.5rem]/[1.2]">
           {post.title}
         </h1>
         <p className="mt-4 text-[1.0625rem]/[1.6] tracking-[-0.01em] text-mauve-700">{post.description}</p>

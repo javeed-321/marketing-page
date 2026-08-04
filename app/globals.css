@@ -125,22 +125,66 @@
   font-weight: inherit;
 }
 
+/*
+ * Heading sizes are responsive on the live site, and the breakpoint is 1280px
+ * — not one of Tailwind's defaults for this purpose, so it is written out:
+ *   h2  24px below 1280px, 32px at and above
+ *   h3  18px below 1280px, 20px at and above
+ * A fixed 32/20 (the desktop values) made every heading look a size too big on
+ * laptop widths, which is where most of these posts are read.
+ */
 .prose :where(h2) {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
 }
 
 .prose :where(h3) {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
+}
+
+@media (min-width: 1280px) {
+  .prose :where(h2) {
+    font-size: 2rem;
+  }
+
+  .prose :where(h3) {
+    font-size: 1.25rem;
+  }
 }
 
 .prose :where(h4) {
   font-size: 1.0625rem;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
+}
+
+/*
+ * Blockquotes, measured from the live "📌 Update:" notes:
+ *   15px italic, weight 400, line-height 1.4, near-black
+ *   22px left padding, a 2px red-500 bar
+ *
+ * Tailwind Typography defaults to a 4px border, 1em padding, weight 500 and
+ * curly quote marks around the first paragraph — the live site has none of
+ * those, so the quote marks are switched off explicitly.
+ */
+.prose :where(blockquote) {
+  font-size: 0.9375rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--color-mauve-950);
+  border-left-width: 2px;
+  border-radius: 2px;
+  padding-inline-start: 22px;
+}
+
+.prose :where(blockquote p):first-of-type::before,
+.prose :where(blockquote p):last-of-type::after {
+  content: none;
 }
 
 /* Links carry the body colour on the live site — the red is reserved for

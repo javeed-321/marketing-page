@@ -42,6 +42,10 @@ The purpose of this comparison is to show where each platform fits well and wher
 
 ### ReadMe
 
+ReadMe’s onboarding is clearly oriented toward API documentation. During setup, users are guided to define a project, customize branding, and choose how to document their product, most prominently through OpenAPI imports or API designer flows.
+
+This makes sense for API-first teams, but it also means onboarding assumes familiarity with developer concepts from the start. Non-technical contributors can participate later, but the initial setup feels developer-led and product-centric rather than editorial.
+
 <iframe
   src="https://www.youtube.com/embed/W8MTtvemYZk"
   title="ReadMe"
@@ -49,11 +53,11 @@ The purpose of this comparison is to show where each platform fits well and wher
   allowFullScreen
 ></iframe>
 
-ReadMe’s onboarding is clearly oriented toward API documentation. During setup, users are guided to define a project, customize branding, and choose how to document their product, most prominently through OpenAPI imports or API designer flows.
-
-This makes sense for API-first teams, but it also means onboarding assumes familiarity with developer concepts from the start. Non-technical contributors can participate later, but the initial setup feels developer-led and product-centric rather than editorial.
-
 ### Document360
+
+Document360’s onboarding is more enterprise-oriented. Signup requires a work email, and users are guided through workspace and knowledge base setup before reaching the editor. Documentation created during trials remains private by default.
+
+This introduces more steps early on, but it establishes structure, roles, and governance upfront, which is valuable for support and operations teams.
 
 <iframe
   src="https://www.youtube.com/embed/5ylkS3bdsKo"
@@ -62,15 +66,15 @@ This makes sense for API-first teams, but it also means onboarding assumes famil
   allowFullScreen
 ></iframe>
 
-Document360’s onboarding is more enterprise-oriented. Signup requires a work email, and users are guided through workspace and knowledge base setup before reaching the editor. Documentation created during trials remains private by default.
-
-This introduces more steps early on, but it establishes structure, roles, and governance upfront, which is valuable for support and operations teams.
-
 **Onboarding verdict:** ReadMe prioritizes API setup. Document360 prioritizes structure and control.
 
 ## Writing & Maintaining Documentation
 
 ### For Non-Technical Contributors
+
+ReadMe supports in-browser editing, but content organization is tightly tied to predefined sections like Guides, API Reference, Changelog, and Pages. Navigation changes are managed through the dashboard rather than free-form restructuring.
+
+This works well for structured developer portals but feels rigid for writers or support teams making frequent content changes.
 
 <iframe
   src="https://www.youtube.com/embed/bMcvY3A8WIY"
@@ -79,18 +83,14 @@ This introduces more steps early on, but it establishes structure, roles, and go
   allowFullScreen
 ></iframe>
 
+Document360 is more comfortable for non-technical contributors. Content is organized into categories and articles, with review and approval workflows built in. This suits support teams well, though quick restructuring can feel slower due to governance steps.
+
 <iframe
   src="https://www.youtube.com/embed/K9EIvTa2qAo"
   title="For Non-Technical Contributors"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowFullScreen
 ></iframe>
-
-ReadMe supports in-browser editing, but content organization is tightly tied to predefined sections like Guides, API Reference, Changelog, and Pages. Navigation changes are managed through the dashboard rather than free-form restructuring.
-
-This works well for structured developer portals but feels rigid for writers or support teams making frequent content changes.
-
-Document360 is more comfortable for non-technical contributors. Content is organized into categories and articles, with review and approval workflows built in. This suits support teams well, though quick restructuring can feel slower due to governance steps.
 
 ### For Developers
 
@@ -102,12 +102,16 @@ Document360 is not docs-as-code-oriented. Developers do not manage documentation
 
 ## AI Capabilities in Real Usage
 
+In ReadMe, AI features are focused on quality and consistency. Agent Owlbert assists with rewriting and improving clarity, while AI Doc Linting and Docs Audit help identify gaps, inconsistencies, and missing sections. All AI output requires manual review and acceptance. AI does not manage navigation or publishing automatically.
+
 <iframe
   src="https://www.youtube.com/embed/mNFHkhb0BnU"
   title="AI Capabilities in Real Usage"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowFullScreen
 ></iframe>
+
+In Document360, AI (Eddy AI) focuses on article-level generation. It can draft new articles, generate step-by-step guides, and refine content, but it does not reorganize the knowledge base, manage structure, or automate publishing.
 
 <iframe
   src="https://www.youtube.com/embed/z5y3RffSgL0"
@@ -116,13 +120,11 @@ Document360 is not docs-as-code-oriented. Developers do not manage documentation
   allowFullScreen
 ></iframe>
 
-In ReadMe, AI features are focused on quality and consistency. Agent Owlbert assists with rewriting and improving clarity, while AI Doc Linting and Docs Audit help identify gaps, inconsistencies, and missing sections. All AI output requires manual review and acceptance. AI does not manage navigation or publishing automatically.
-
-In Document360, AI (Eddy AI) focuses on article-level generation. It can draft new articles, generate step-by-step guides, and refine content, but it does not reorganize the knowledge base, manage structure, or automate publishing.
-
 **AI verdict:** Both platforms use AI to assist writing and quality checks, not long-term documentation maintenance. Newer AI-native platforms go further: Documentation.AI's agent detects product changes and drafts updates, so documentation maintains itself rather than waiting on a human to catch drift.
 
 ## Publishing & Public Documentation Experience
+
+ReadMe’s published documentation feels like a developer portal. It emphasizes interactive API references, code samples, and structured navigation. This is powerful for developers but can feel heavier than product-style docs.
 
 <iframe
   src="https://www.youtube.com/embed/wZicRac9WUo"
@@ -131,6 +133,8 @@ In Document360, AI (Eddy AI) focuses on article-level generation. It can draft n
   allowFullScreen
 ></iframe>
 
+Document360 follows a controlled publishing model. Articles must be published manually, and public docs resemble a traditional support knowledge base with category-driven navigation.
+
 <iframe
   src="https://www.youtube.com/embed/oFJRXpZhVyE"
   title="Publishing & Public Documentation Experience"
@@ -138,21 +142,17 @@ In Document360, AI (Eddy AI) focuses on article-level generation. It can draft n
   allowFullScreen
 ></iframe>
 
-ReadMe’s published documentation feels like a developer portal. It emphasizes interactive API references, code samples, and structured navigation. This is powerful for developers but can feel heavier than product-style docs.
-
-Document360 follows a controlled publishing model. Articles must be published manually, and public docs resemble a traditional support knowledge base with category-driven navigation.
-
 **Publishing verdict:** ReadMe emphasizes interaction. Document360 emphasizes control.
 
 ## Pricing
 
-![Pricing](./01.jpg)
-
-![Pricing](./02.jpg)
-
 ReadMe offers a clearly tiered pricing model. The free plan ($0/month) includes API versions, an interactive API reference, a Markdown editor, customizable themes, and basic AI features. The Pro plan starts at $250/month (billed annually) and adds bidirectional sync, changelogs, MDX components, custom domains, and advanced AI features such as Agent Owlbert, Ask AI Lite, and AI Doc Linter. Enterprise plans start around $3,000+/month, including all the Pro features but also adding SSO, audit logs, private AI context, global lint rules, and dedicated support.
 
+![Pricing](./01.jpg)
+
 Document360 does not publish transparent self-serve pricing for most production use cases. While a free trial is available, meaningful usage typically requires engaging with sales. Pricing is positioned toward mid-market and enterprise teams and varies based on users, workflows, and features.
+
+![Pricing](./02.jpg)
 
 **Pricing verdict:** ReadMe scales by feature depth. Document360 is sales-led and enterprise-oriented. By contrast, [Documentation.AI publishes flat pricing](https://documentation.ai/pricing) across four tiers: Free, $55, $159, and Enterprise with the AI Assistant included from the free plan.
 
@@ -190,9 +190,7 @@ While AI is now widely used to assist with writing, rewriting, and answering que
 
 As documentation grows, this ongoing manual maintenance becomes the most expensive part of the process.
 
->
-
-Over time, teams find that AI writing tools alone don’t meaningfully reduce documentation maintenance. Focus is shifting to platforms that manage documentation at scale by organizing structure, flagging outdated content, and identifying gaps. [Documentation.AI](https://documentation.ai) follows this approach, providing a more cost-efficient way to keep documentation accurate and well structured without constant manual updates.
+> Over time, teams find that AI writing tools alone don’t meaningfully reduce documentation maintenance. Focus is shifting to platforms that manage documentation at scale by organizing structure, flagging outdated content, and identifying gaps. [Documentation.AI](https://documentation.ai) follows this approach, providing a more cost-efficient way to keep documentation accurate and well structured without constant manual updates.
 
 ## Final Take
 

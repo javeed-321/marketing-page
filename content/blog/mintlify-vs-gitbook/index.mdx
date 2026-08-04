@@ -58,13 +58,17 @@ Specifically, I looked at:
 
 Rather than trying to declare a single winner, the goal is to show **where each platform fits naturally and where friction starts to appear**, depending on how documentation is owned and maintained within a team
 
->
-
-📌 **Update:** Mintlify has launched a beta version of its new editor for easier content editing by non-developers. I’ll update this comparison once it’s fully available and tested
+> 📌 **Update:** Mintlify has launched a beta version of its new editor for easier content editing by non-developers. I’ll update this comparison once it’s fully available and tested
 
 ## Onboarding Experience
 
 ### Mintlify
+
+Mintlify’s onboarding immediately signals that it’s built for developers. There is no obvious login option on the homepage; users must click **“Start for free”** before reaching the signup flow, which can feel confusing for first‑time or non‑technical users.
+
+Account creation supports Google sign‑in or email, but setting up documentation requires connecting a GitHub repository. The onboarding checklist explicitly prompts users to sign in with GitHub and create a repo, making GitHub effectively mandatory for publishing docs. Once connected, the process is fast: a repository is created and documentation is auto‑published on a Mintlify subdomain.
+
+For developers already comfortable with Git workflows, this feels smooth and efficient.
 
 <iframe
   src="https://www.youtube.com/embed/AaqGC9mzzao"
@@ -73,13 +77,13 @@ Rather than trying to declare a single winner, the goal is to show **where each 
   allowFullScreen
 ></iframe>
 
-Mintlify’s onboarding immediately signals that it’s built for developers. There is no obvious login option on the homepage; users must click **“Start for free”** before reaching the signup flow, which can feel confusing for first‑time or non‑technical users.
-
-Account creation supports Google sign‑in or email, but setting up documentation requires connecting a GitHub repository. The onboarding checklist explicitly prompts users to sign in with GitHub and create a repo, making GitHub effectively mandatory for publishing docs. Once connected, the process is fast: a repository is created and documentation is auto‑published on a Mintlify subdomain.
-
-For developers already comfortable with Git workflows, this feels smooth and efficient.
-
 ### GitBook
+
+GitBook makes a strong first impression for broader audiences. The homepage clearly separates **“Login”** and **“Get started for free,”** so visitors immediately understand how to sign in or create an account. Signup supports GitHub, Google, or email, meaning non‑developers are not forced to connect a repository upfront.
+
+The onboarding flow begins with naming your organization and creating a workspace. From there, GitBook guides users into creating their first documentation space without requiring any technical configuration. You can start writing immediately using the block‑based editor, with Git‑based workflows remaining optional and configurable later.
+
+This staged approach lowers the barrier for non‑technical contributors while still supporting docs‑as‑code when developers are ready.
 
 <iframe
   src="https://www.youtube.com/embed/Po75AEoFPqM"
@@ -88,17 +92,13 @@ For developers already comfortable with Git workflows, this feels smooth and eff
   allowFullScreen
 ></iframe>
 
-GitBook makes a strong first impression for broader audiences. The homepage clearly separates **“Login”** and **“Get started for free,”** so visitors immediately understand how to sign in or create an account. Signup supports GitHub, Google, or email, meaning non‑developers are not forced to connect a repository upfront.
-
-The onboarding flow begins with naming your organization and creating a workspace. From there, GitBook guides users into creating their first documentation space without requiring any technical configuration. You can start writing immediately using the block‑based editor, with Git‑based workflows remaining optional and configurable later.
-
-This staged approach lowers the barrier for non‑technical contributors while still supporting docs‑as‑code when developers are ready.
-
 **Onboarding verdict:** Mintlify works best when documentation is fully developer‑owned and Git‑centric. GitBook removes friction for mixed teams and gets documentation live faster without mandatory Git setup.
 
 ## Writing & Maintaining Documentation Over Time
 
 ### For Non‑Technical Contributors
+
+**Mintlify** assumes comfort with Markdown and MDX. While a basic visual editor exists, meaningful control over structure and navigation requires editing files and configuration such as `docs.json`. In practice, reorganizing sections or navigation involves manual config updates. Collaboration features are developer‑centric, with no Google‑Docs‑style comments or suggestion workflows.
 
 <iframe
   src="https://www.youtube.com/embed/8PER0Q8CVI8"
@@ -107,18 +107,16 @@ This staged approach lowers the barrier for non‑technical contributors while s
   allowFullScreen
 ></iframe>
 
+**GitBook** uses a block‑based WYSIWYG editor that allows non‑technical users to write and format content without learning Markdown. Headings, images, tabs, hints, and code blocks can be added via a toolbar or slash commands. Pages and reusable content are organized in a sidebar.
+
+Edits are typically made through a change‑request flow, which mirrors Git‑style reviews. This provides structure and editorial control but can feel formal for simple updates. Collaboration features include page‑level comments and role‑based permissions, and GitBook’s AI assistant can help brainstorm or rewrite selected text.
+
 <iframe
   src="https://www.youtube.com/embed/nxVTWmW7-rM"
   title="For Non‑Technical Contributors"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowFullScreen
 ></iframe>
-
-**Mintlify** assumes comfort with Markdown and MDX. While a basic visual editor exists, meaningful control over structure and navigation requires editing files and configuration such as `docs.json`. In practice, reorganizing sections or navigation involves manual config updates. Collaboration features are developer‑centric, with no Google‑Docs‑style comments or suggestion workflows.
-
-**GitBook** uses a block‑based WYSIWYG editor that allows non‑technical users to write and format content without learning Markdown. Headings, images, tabs, hints, and code blocks can be added via a toolbar or slash commands. Pages and reusable content are organized in a sidebar.
-
-Edits are typically made through a change‑request flow, which mirrors Git‑style reviews. This provides structure and editorial control but can feel formal for simple updates. Collaboration features include page‑level comments and role‑based permissions, and GitBook’s AI assistant can help brainstorm or rewrite selected text.
 
 **Editing verdict:** Mintlify gives full control to developers but is uncomfortable for non‑technical contributors. GitBook’s editor is more inclusive and supports mixed teams, even though its review‑driven workflow adds some process overhead.
 
@@ -134,6 +132,8 @@ GitBook also supports two‑way Git sync. Developers can write Markdown or MDX i
 
 ### AI Agent — Creating & Maintaining Docs
 
+**Mintlify**’s AI works primarily as a writing and suggestion assistant. During testing, it responded slowly and was limited to small rewrites or contextual suggestions. It does not generate a complete documentation structure on its own, and users must manually apply changes in the correct MDX or configuration files.
+
 <iframe
   src="https://www.youtube.com/embed/osUCjsb_HQs"
   title="AI Agent — Creating & Maintaining Docs"
@@ -141,16 +141,14 @@ GitBook also supports two‑way Git sync. Developers can write Markdown or MDX i
   allowFullScreen
 ></iframe>
 
+**GitBook** offers two AI tools: GitBook Assistant and GitBook Agent. The Assistant rewrites, summarizes, translates, or clarifies highlighted text. The Agent operates through change requests for larger updates, generating pages or edits within a defined scope. GitBook’s AI can assist with content creation and maintenance but does not autonomously restructure an entire documentation site.
+
 <iframe
   src="https://www.youtube.com/embed/oFDWpkLzDwg"
   title="AI Agent — Creating & Maintaining Docs"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowFullScreen
 ></iframe>
-
-**Mintlify**’s AI works primarily as a writing and suggestion assistant. During testing, it responded slowly and was limited to small rewrites or contextual suggestions. It does not generate a complete documentation structure on its own, and users must manually apply changes in the correct MDX or configuration files.
-
-**GitBook** offers two AI tools: GitBook Assistant and GitBook Agent. The Assistant rewrites, summarizes, translates, or clarifies highlighted text. The Agent operates through change requests for larger updates, generating pages or edits within a defined scope. GitBook’s AI can assist with content creation and maintenance but does not autonomously restructure an entire documentation site.
 
 **AI verdict:** Mintlify’s AI is limited and developer‑oriented. GitBook’s AI is more integrated into the editor and reader experience but still requires human oversight for major structural changes.
 
@@ -162,6 +160,8 @@ Mintlify provides a reader-facing AI assistant that can be embedded in published
 
 ### Mintlify
 
+Mintlify produces clean, modern, and fast‑loading public documentation. Typography, spacing, and navigation feel polished by default, and light and dark modes are supported. Page loads are fast and the reading experience is smooth, but the experience is largely static with no built‑in reader AI.
+
 <iframe
   src="https://www.youtube.com/embed/s1mYhmKyT0c"
   title="Mintlify"
@@ -169,9 +169,11 @@ Mintlify provides a reader-facing AI assistant that can be embedded in published
   allowFullScreen
 ></iframe>
 
-Mintlify produces clean, modern, and fast‑loading public documentation. Typography, spacing, and navigation feel polished by default, and light and dark modes are supported. Page loads are fast and the reading experience is smooth, but the experience is largely static with no built‑in reader AI.
-
 ### GitBook
+
+GitBook’s published docs are similarly polished and professional. Pages render as clean, responsive layouts, and interactive API explorers are available when using OpenAPI integrations. An embedded Ask‑AI chat makes the documentation more interactive for readers.
+
+Customization is primarily theme‑driven and managed through the UI. Deeper layout changes or custom CSS/JS require working within GitBook’s interface rather than pure code.
 
 <iframe
   src="https://www.youtube.com/embed/UOULViS5svI"
@@ -180,31 +182,27 @@ Mintlify produces clean, modern, and fast‑loading public documentation. Typogr
   allowFullScreen
 ></iframe>
 
-GitBook’s published docs are similarly polished and professional. Pages render as clean, responsive layouts, and interactive API explorers are available when using OpenAPI integrations. An embedded Ask‑AI chat makes the documentation more interactive for readers.
-
-Customization is primarily theme‑driven and managed through the UI. Deeper layout changes or custom CSS/JS require working within GitBook’s interface rather than pure code.
-
 **End‑user verdict:** Both platforms deliver fast, polished docs. GitBook adds interactivity through reader‑facing AI and API explorers, while Mintlify focuses on performance and design.
 
 ### Pricing
 
 ### Mintlify
 
-![Mintlify](./01.jpg)
-
 Mintlify offers a free **Hobby** plan for individuals, limited to one dashboard member with no collaboration, making it suitable only for small experiments. There is no meaningful mid-tier option between Hobby and paid plans.
 
 Teams must upgrade to **Pro** to unlock collaboration, AI features, preview deployments, and security controls. Pro costs **$300/month** on monthly billing or **$250/month annually**, with additional users typically billed at **$20 per user per month**. Enterprise features like SSO and SLAs are available only through custom pricing, and costs increase quickly as team size grows.
 
-### GitBook
+![Mintlify](./01.jpg)
 
-![GitBook](./02.jpg)
+### GitBook
 
 GitBook uses a pricing model based on **both per-site and per-user fees**. Its free plan allows one site with one user on a gitbook.io domain, which works for personal projects but not for real team usage.
 
 Collaboration, custom domains, branding, and AI features require the **Premium** plan at **$79 per site per month** plus **$15 per user per month**. More advanced capabilities such as sections, cross-site search, authenticated access, adaptive content, and the AI Assistant require the **Ultimate** plan at **$299 per site per month**, plus the same per-user fee.
 
 Enterprise features including SAML SSO, migrations, and dedicated support are available through custom pricing. Because GitBook charges per site in addition to per-user fees, costs increase as teams add multiple documentation sites for different products, environments, or audiences.
+
+![GitBook](./02.jpg)
 
 **Pricing verdict:** Mintlify becomes expensive quickly once teams move beyond solo usage, jumping directly to a high monthly cost. GitBook has a lower entry point and is easier to adopt for small teams, but its per-site and per-user pricing can add up as documentation scales across multiple products or teams.
 
@@ -259,11 +257,9 @@ Enterprise features including SAML SSO, migrations, and dedicated support are av
 | **Pricing scalability** | Sharp jump after free | Gradual, but per-site costs add up |
 | **Enterprise readiness** | Yes (custom pricing) | Yes (custom pricing) |
 
->
-
-**Need help migrating from Mintlify, GitBook, or another documentation platform?**\
-If your setup includes large MDX repositories, custom navigation, multiple documentation sites, or mixed Git and editor workflows, Documentation.AI offers hands-on migration support.\
-**Documentation.AI Slack channel:** [Join here](https://join.slack.com/t/documentationai/shared_invite/zt-3dl0x2qds-L85dnLpKyZ6oc5ZLba9_~Q)
+> **Need help migrating from Mintlify, GitBook, or another documentation platform?**\
+> If your setup includes large MDX repositories, custom navigation, multiple documentation sites, or mixed Git and editor workflows, Documentation.AI offers hands-on migration support.\
+> **Documentation.AI Slack channel:** [Join here](https://join.slack.com/t/documentationai/shared_invite/zt-3dl0x2qds-L85dnLpKyZ6oc5ZLba9_~Q)
 
 ## How Teams Use Documentation Platforms in 2026
 
@@ -271,9 +267,7 @@ In 2026, documentation is no longer owned only by developers. Product teams, sup
 
 Tools like Mintlify and GitBook still serve clear use cases. Mintlify fits teams where documentation stays close to code and is fully managed by engineers. GitBook works better for teams that want a visual editor and shared ownership across technical and non-technical contributors.
 
->
-
-At the same time, many teams are looking for platforms that reduce maintenance effort and cost as documentation grows. This is why AI-native options like [**Documentation.AI**](https://documentation.ai) are becoming relevant for teams that want easier collaboration, automated updates, and more predictable pricing.
+> At the same time, many teams are looking for platforms that reduce maintenance effort and cost as documentation grows. This is why AI-native options like [**Documentation.AI**](https://documentation.ai) are becoming relevant for teams that want easier collaboration, automated updates, and more predictable pricing.
 
 ## Final Take
 

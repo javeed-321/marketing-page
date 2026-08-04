@@ -38,15 +38,19 @@ The comparison focuses on practical questions teams care about, such as:
 
 The goal is not to crown a single winner but to clearly show where each platform fits and where it starts to struggle, depending on team structure and expectations.
 
->
-
-📌**Update:** Mintlify has recently updated its editor experience and opened it in beta, making content editing more accessible for non-developers. Since this release is still in beta, I will review and update this comparison once the editor is generally available.
+> 📌**Update: **Mintlify has recently updated its editor experience and opened it in beta, making content editing more accessible for non-developers. Since this release is still in beta, I will review and update this comparison once the editor is generally available.
 
 ## Which is easier to onboard?
 
 Documentation.AI targets a fast, low-setup start for both technical and non-technical contributors, while Mintlify centers on a docs-as-code, Git-based workflow. Teams with writers who do not work in Git tend to onboard faster on a platform built around a visual editor rather than pull requests.
 
 ### Mintlify
+
+Mintlify’s onboarding immediately signals that it’s built for developers.
+
+Account creation supports options like Google sign-in or entering basic details. However, to actually set up documentation, Mintlify requires connecting a GitHub account. The onboarding checklist clearly prompts users to sign in with GitHub in order to create a repository, making GitHub effectively mandatory for publishing documentation.
+
+Once connected to GitHub, onboarding is fast and efficient. A repository is created, and documentation is auto-published immediately on a Mintlify subdomain. For developers already comfortable with Git workflows, this process feels smooth and straightforward. For users who don't have access to GitHub and/or want to publish content, this is an obvious bottleneck.
 
 <iframe
   src="https://www.youtube.com/embed/AaqGC9mzzao"
@@ -55,20 +59,7 @@ Documentation.AI targets a fast, low-setup start for both technical and non-tech
   allowFullScreen
 ></iframe>
 
-Mintlify’s onboarding immediately signals that it’s built for developers.
-
-Account creation supports options like Google sign-in or entering basic details. However, to actually set up documentation, Mintlify requires connecting a GitHub account. The onboarding checklist clearly prompts users to sign in with GitHub in order to create a repository, making GitHub effectively mandatory for publishing documentation.
-
-Once connected to GitHub, onboarding is fast and efficient. A repository is created, and documentation is auto-published immediately on a Mintlify subdomain. For developers already comfortable with Git workflows, this process feels smooth and straightforward. For users who don't have access to GitHub and/or want to publish content, this is an obvious bottleneck.
-
 ### Documentation.AI
-
-<iframe
-  src="https://www.youtube.com/embed/uykRQHTS_54"
-  title="Documentation.AI"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowFullScreen
-></iframe>
 
 Documentation.AI offers a clearer and more flexible starting experience. Signup does not require mandatory GitHub authorization, making it accessible to non-technical contributors.
 
@@ -78,11 +69,22 @@ During onboarding, users are asked to confirm their company or brand name, which
 
 Once a setup path is selected, Documentation.AI automatically generates a complete documentation structure, including core sections and navigation. The documentation site is auto-published immediately after onboarding, with a live public URL available within minutes.
 
+<iframe
+  src="https://www.youtube.com/embed/uykRQHTS_54"
+  title="Documentation.AI"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowFullScreen
+></iframe>
+
 **Onboarding verdict:** Mintlify works best for developer-only teams already committed to GitHub workflows. Documentation.AI removes friction for mixed teams and gets documentation live faster with fewer prerequisites.
 
 ## Writing & Maintaining Documentation Over Time
 
 ### For Non-Technical Contributors
+
+Mintlify’s editing experience assumes comfort with MDX and Git. While a visual editor exists, meaningful control over structure and navigation requires working directly with files and configuration. In practice, reorganizing sections or navigation involves manually editing the `docs.json` file, which defines the documentation structure.
+
+Because navigation is file- and config-driven rather than drag-and-drop, restructuring documentation can be difficult for writers or product managers. Collaboration features also feel developer-centric, with no Google Docs–style comments or suggestion workflows.
 
 <iframe
   src="https://www.youtube.com/embed/8PER0Q8CVI8"
@@ -91,18 +93,14 @@ Once a setup path is selected, Documentation.AI automatically generates a comple
   allowFullScreen
 ></iframe>
 
+Documentation.AI takes a more inclusive approach. The web editor allows non-technical users to write, restructure, and maintain documentation visually. Navigation changes can be made directly in the UI, updates are reflected live, and an AI agent is embedded within the editor. This significantly reduces dependency on developers for day-to-day documentation maintenance.
+
 <iframe
   src="https://www.youtube.com/embed/p-1M3UJwQ3A"
   title="For Non-Technical Contributors"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowFullScreen
 ></iframe>
-
-Mintlify’s editing experience assumes comfort with MDX and Git. While a visual editor exists, meaningful control over structure and navigation requires working directly with files and configuration. In practice, reorganizing sections or navigation involves manually editing the `docs.json` file, which defines the documentation structure.
-
-Because navigation is file- and config-driven rather than drag-and-drop, restructuring documentation can be difficult for writers or product managers. Collaboration features also feel developer-centric, with no Google Docs–style comments or suggestion workflows.
-
-Documentation.AI takes a more inclusive approach. The web editor allows non-technical users to write, restructure, and maintain documentation visually. Navigation changes can be made directly in the UI, updates are reflected live, and an AI agent is embedded within the editor. This significantly reduces dependency on developers for day-to-day documentation maintenance.
 
 ### For Developers
 
@@ -124,6 +122,10 @@ Both platforms offer an AI assistant and an AI writing agent. Documentation.AI's
 
 ### **Mintlify**
 
+Mintlify’s Editor AI agent works mainly as a basic writing and suggestion assistant. During testing, it took noticeable time to respond and was limited to proposing small rewrites or contextual suggestions. It did not generate a complete documentation structure on its own.
+
+The AI also does not clearly indicate where changes should be applied. Users must manually locate the correct MDX files or configuration files to implement suggestions, and updates are not reflected immediately.
+
 <iframe
   src="https://www.youtube.com/embed/osUCjsb_HQs"
   title="Mintlify"
@@ -131,11 +133,11 @@ Both platforms offer an AI assistant and an AI writing agent. Documentation.AI's
   allowFullScreen
 ></iframe>
 
-Mintlify’s Editor AI agent works mainly as a basic writing and suggestion assistant. During testing, it took noticeable time to respond and was limited to proposing small rewrites or contextual suggestions. It did not generate a complete documentation structure on its own.
-
-The AI also does not clearly indicate where changes should be applied. Users must manually locate the correct MDX files or configuration files to implement suggestions, and updates are not reflected immediately.
-
 ### **Documentation.AI**
+
+Documentation.AI’s AI agent is useful for both developers and non-developers and is especially easy for non-technical users to work with. It can generate a complete documentation structure, expand sections, and help maintain content over time.
+
+While generation may take a short amount of time, changes are applied directly in the editor and reflected immediately. Users do not need to locate files or manage configuration manually.
 
 <iframe
   src="https://www.youtube.com/embed/_dwaTz1nqu8"
@@ -143,10 +145,6 @@ The AI also does not clearly indicate where changes should be applied. Users mus
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowFullScreen
 ></iframe>
-
-Documentation.AI’s AI agent is useful for both developers and non-developers and is especially easy for non-technical users to work with. It can generate a complete documentation structure, expand sections, and help maintain content over time.
-
-While generation may take a short amount of time, changes are applied directly in the editor and reflected immediately. Users do not need to locate files or manage configuration manually.
 
 ### Ask AI (User-Facing AI Assistant)
 
@@ -160,6 +158,10 @@ Documentation.AI’s Ask-AI feature accurately reads the published documentation
 
 ### Mintlify
 
+Mintlify produces clean, modern, and fast-loading public documentation. Typography, spacing, and navigation feel professional by default, and users can switch between light and dark modes while browsing the docs. Page loads are fast, and the reading experience is smooth across sections.
+
+However, the published documentation experience is largely static. There is no Ask-AI or reader-facing AI assistant available in the live docs, and readers must rely on manual navigation to find answers.
+
 <iframe
   src="https://www.youtube.com/embed/s1mYhmKyT0c"
   title="Mintlify"
@@ -167,11 +169,11 @@ Documentation.AI’s Ask-AI feature accurately reads the published documentation
   allowFullScreen
 ></iframe>
 
-Mintlify produces clean, modern, and fast-loading public documentation. Typography, spacing, and navigation feel professional by default, and users can switch between light and dark modes while browsing the docs. Page loads are fast, and the reading experience is smooth across sections.
-
-However, the published documentation experience is largely static. There is no Ask-AI or reader-facing AI assistant available in the live docs, and readers must rely on manual navigation to find answers.
-
 ### Documentation.AI
+
+Documentation.AI matches this level of polish while also supporting light and dark modes, quick navigation, and consistently fast load times. In addition, published documentation includes a built-in Ask-AI feature that allows readers to ask questions directly against the live documentation.
+
+Ask-AI reads the current content, understands context, and returns relevant answers without requiring users to search or leave the page. This makes the documentation more interactive and easier to consume, especially for first-time users.
 
 <iframe
   src="https://www.youtube.com/embed/94CBSM11l5I"
@@ -180,21 +182,17 @@ However, the published documentation experience is largely static. There is no A
   allowFullScreen
 ></iframe>
 
-Documentation.AI matches this level of polish while also supporting light and dark modes, quick navigation, and consistently fast load times. In addition, published documentation includes a built-in Ask-AI feature that allows readers to ask questions directly against the live documentation.
-
-Ask-AI reads the current content, understands context, and returns relevant answers without requiring users to search or leave the page. This makes the documentation more interactive and easier to consume, especially for first-time users.
-
 **End-user verdict:** Both platforms deliver high-quality, fast, and visually polished public documentation with light and dark mode support. Documentation.AI goes a step further by adding a built-in Ask-AI assistant, making the reading experience more interactive and flexible out of the box.
 
 ## Pricing
 
-![Pricing](./01.png)
-
-![Pricing](./02.png)
-
 Mintlify offers a free Starter plan, but it is primarily suitable for individual developers or small experiments. To unlock collaboration features, AI capabilities, preview deployments, and security controls, teams need to upgrade to the Pro plan, which is priced around **$540 per month** on monthly billing and slightly lower on annual plans. There is no meaningful mid-tier option, so teams tend to jump directly from free to a high-cost plan as soon as they scale beyond solo usage. Enterprise features such as SSO, custom authentication, and SLAs are available only through custom pricing, which further increases cost as requirements grow.
 
+![Pricing](./01.png)
+
 Documentation.AI follows a more gradual pricing model. The free Starter plan is usable for real documentation projects and already includes AI credits, a visual editor, search, analytics, and a custom domain. Paid plans start at a much lower price point **(around $69/month)**, allowing small teams to access AI features and collaboration without a large upfront cost. As teams grow, pricing scales step by step rather than jumping abruptly. This makes long-term costs more predictable and better aligned with how documentation teams actually expand.
+
+![Pricing](./02.png)
 
 **Pricing verdict:** Mintlify becomes expensive quickly as teams move beyond individual usage. Documentation.AI offers a more accessible and predictable pricing path as teams grow. To learn more about the credit system of Mintlify and an in-depth pricing guide, click [here.](https://documentation.ai/blog/mintlify-pricing-guide)
 
@@ -247,9 +245,7 @@ Mintlify is worth it if your documentation is owned entirely by developers who a
 | **Pricing scalability** | Steep jumps | Gradual & predictable |
 | **Enterprise readiness** | Yes (custom) | Yes (custom) |
 
->
-
-Mintlify recently released an AI Agent that reads github pushes and give an plan to auto updated documentation. Looks promising but we could not test it out. Documentation.AI also has similar features in the pipeline.
+> Mintlify recently released an AI Agent that reads github pushes and give an plan to auto updated documentation. Looks promising but we could not test it out. Documentation.AI also has similar features in the pipeline.
 
 ## Related Mintlify Comparisons
 
@@ -266,11 +262,9 @@ For teams that include product managers or support teams, and for those who want
 
 The best choice ultimately depends on how your team works today and how you expect your documentation needs to evolve as you scale.
 
->
-
-**Need help migrating from Mintlify or another documentation platform?**\
-If your setup involves large MDX repositories, custom navigation, or mixed Git and editor workflows. You can connect directly with our team and discuss your setup on Slack.\
-**Documentation.AI Slack channel:** [Join here](https://join.slack.com/t/documentationai/shared_invite/zt-3dl0x2qds-L85dnLpKyZ6oc5ZLba9_~Q)
+> **Need help migrating from Mintlify or another documentation platform?**\
+> If your setup involves large MDX repositories, custom navigation, or mixed Git and editor workflows. You can connect directly with our team and discuss your setup on Slack.\
+> **Documentation.AI Slack channel:** [Join here](https://join.slack.com/t/documentationai/shared_invite/zt-3dl0x2qds-L85dnLpKyZ6oc5ZLba9_~Q)
 
 ## **Frequently Asked Questions**
 
