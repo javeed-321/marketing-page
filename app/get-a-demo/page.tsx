@@ -87,6 +87,11 @@ export default function Page() {
          */}
         <Section
           id="hero"
+          // `Section`'s `py-16` leaves 64px between the navbar and the headline,
+          // which reads as dead space on a phone where the headline is already
+          // the first thing below the logo. Mobile only — the desktop rhythm is
+          // unchanged, and this is scoped to this page's instance.
+          className="max-sm:pt-4"
           headline={HEADLINE}
           subheadline={
             <>

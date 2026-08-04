@@ -44,6 +44,23 @@ const defaultComponents: MDXComponents = {
   },
 
   /**
+   * A Markdown table compiles to a bare <table> with nothing around it, so
+   * there is no element in the tree that can scroll it. Tailwind Typography
+   * sizes tables `width: 100%`, but under `table-layout: auto` that is a floor,
+   * not a cap: a table whose columns cannot squeeze below the viewport grows
+   * past it instead, and with no scroll container anywhere in the chain the
+   * overflow reaches the document and drags the whole page sideways.
+   *
+   * Wrapping each one gives that overflow somewhere to go. Styling is in
+   * `.table-scroll` in globals.css, next to the rest of the table rules.
+   */
+  table: ({ children, ...props }) => (
+    <div className="table-scroll">
+      <table {...props}>{children}</table>
+    </div>
+  ),
+
+  /**
    * `<YouTube id="…" title="…" />` — the one component posts may use. Written
    * as a tag rather than a raw <iframe> because the rendered markup is a
    * thumbnail facade, not an iframe at all until the reader clicks it.

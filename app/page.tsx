@@ -8,11 +8,11 @@ import { HERO_CONTENT, HeroSection } from '@/components/site/hero-section'
 import { MORE_REASONS_CONTENT, MoreReasons } from '@/components/site/more-reasons'
 import { PRODUCT_TABS_CONTENT, ProductTabs } from '@/components/site/product-tabs'
 import { PUBLISHING_EXPERIENCE_CONTENT, PublishingExperience } from '@/components/site/publishing-experience'
-import { SITE_FOOTER_CONTENT, SiteFooter } from '@/components/site/site-footer'
 import { TRUSTED_BY_CONTENT, TrustedBy } from '@/components/site/trusted-by'
 
 // Homepage — section order lives here, the words live in each section's
 // `*_CONTENT` object, and the components themselves hold only layout.
+// The footer is not here: it renders once in app/layout.tsx, for every page.
 export default function Page() {
   return (
     <>
@@ -34,7 +34,6 @@ export default function Page() {
         <FinalCta content={FINAL_CTA_CONTENT} />
         <FaqsSection content={FAQS_CONTENT} />
       </div>
-      <SiteFooter content={SITE_FOOTER_CONTENT} />
     </>
   )
 }

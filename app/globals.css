@@ -205,6 +205,28 @@
  * header fill, no radius — so the grid is rebuilt here and Tailwind's own
  * thead/tbody rules are zeroed out to stop them doubling up.
  */
+/*
+ * Every table is wrapped in this box by components/mdx.tsx so it scrolls
+ * itself instead of widening the page. See the comment there for why a bare
+ * <table> cannot do it alone.
+ *
+ * The vertical rhythm moves here from the table. Left on the table it would
+ * sit *inside* the scroll box — stranding the scrollbar 2em below the last
+ * row, and no longer collapsing with the previous paragraph's margin (a
+ * scroll container is a BFC, so margins can't collapse out through it).
+ */
+.prose :where(.table-scroll) {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  overflow-x: auto;
+  /* Reaching the end of the table shouldn't start scrolling the article. */
+  overscroll-behavior-x: contain;
+}
+
+.prose :where(.table-scroll) > table {
+  margin: 0;
+}
+
 .prose :where(table) {
   font-size: 1rem;
   line-height: 1.5;

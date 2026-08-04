@@ -8,6 +8,7 @@ import {
   type NavDropdownGroup,
 } from '@/components/sections/navbar-with-logo-actions-and-centered-links'
 import { LogoWordmark } from '@/components/site/logo-wordmark'
+import { SITE_FOOTER_CONTENT, SiteFooter } from '@/components/site/site-footer'
 import { siteConfig } from '@/lib/site'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Inter } from 'next/font/google'
@@ -109,6 +110,10 @@ export default function RootLayout({
           />
 
           <Main>{children}</Main>
+
+          {/* Every page gets the footer, and it sits outside <Main> — a <footer>
+            * is site-level furniture, not part of the page's main content. */}
+          <SiteFooter content={SITE_FOOTER_CONTENT} />
         </>
       </body>
     </html>
