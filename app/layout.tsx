@@ -74,7 +74,7 @@ export default function RootLayout({
             links={
               <>
                 <NavbarLink href="/docs">Documentation</NavbarLink>
-                <NavbarDropdown label="Solutions" groups={SOLUTIONS} />
+                <NavbarDropdown label="Solutions" href="/solutions" groups={SOLUTIONS} />
                 <NavbarLink href="/blog">Blog</NavbarLink>
                 <NavbarLink href="/pricing">Pricing</NavbarLink>
                 <NavbarLink href="/login" className="sm:hidden">

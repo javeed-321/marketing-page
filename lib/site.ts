@@ -9,7 +9,7 @@ export const siteConfig = {
   logo: '/logo.svg',
   socials: [
     'https://x.com/documentation_i',
-    'https://www.linkedin.com/company/108715959',
+    'https://www.linkedin.com/company/documentation-ai/',
     'https://www.youtube.com/@DocumentationAI',
   ],
 } as const

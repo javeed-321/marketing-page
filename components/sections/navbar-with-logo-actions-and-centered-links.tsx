@@ -41,63 +41,84 @@ export type NavDropdownGroup = {
  * `ElPopover` — which keeps the whole navbar a server component. `group-focus-within`
  * gives keyboard users the same panel: focusing the trigger reveals it, after which
  * the links inside become focusable and Tab walks straight through them.
+ *
+ * Hover has no equivalent on touch, so below `lg` this renders as a plain link to
+ * `href` and the groups are not shown at all.
  */
 export function NavbarDropdown({
   label,
+  href,
   groups,
   className,
   ...props
 }: {
   label: ReactNode
+  /** Where the label goes on mobile, where there is no flyout to open. */
+  href: string
   groups: NavDropdownGroup[]
 } & Omit<ComponentProps<'div'>, 'children'>) {
   return (
-    <div className={clsx('group relative max-lg:w-full', className)} {...props}>
-      <button
-        type="button"
-        aria-haspopup="true"
-        className="inline-flex w-full items-center justify-center gap-1.5 rounded-full px-3 py-1 text-base/6 font-medium text-mauve-950 transition-colors hover:bg-mauve-950/5 lg:group-hover:bg-mauve-950/5 dark:text-white dark:hover:bg-white/10 dark:lg:group-hover:bg-white/10"
-      >
-        {label}
-        {/* Kit ships a right-pointing chevron: rotate-90 = down (closed), -rotate-90 = up (open). */}
-        <ChevronIcon
-          className="rotate-90 transition-transform lg:group-hover:-rotate-90 lg:group-focus-within:-rotate-90"
-          aria-hidden="true"
-        />
-      </button>
-
+    <>
       {/*
-        `pt-3` rather than `mt-3` keeps the trigger and the panel touching, so the pointer
-        can travel down into the panel through the visual gap without it closing.
-        Below lg there is no hover, so the groups just render inline in the mobile menu.
+        Mobile: a plain link, matching the other items in the menu.
+
+        `links` renders twice — once in the header bar, once inside the mobile
+        dialog — so a flyout whose open and closed states are expressed purely in
+        `lg:` variants has no closed state below `lg`: every group renders inline
+        and the menu becomes a wall of links. Rather than rebuild this as a
+        collapsible (which would need client state), the small-screen menu drops
+        the groups and links to the page that lists them.
       */}
-      <div className="max-lg:mt-4 lg:invisible lg:absolute lg:top-full lg:left-1/2 lg:z-20 lg:w-max lg:-translate-x-1/2 lg:pt-3 lg:opacity-0 lg:transition lg:group-hover:visible lg:group-hover:opacity-100 lg:group-focus-within:visible lg:group-focus-within:opacity-100">
-        <div className="flex flex-col gap-2 rounded-2xl p-2 max-lg:items-center lg:min-w-52 lg:bg-white lg:p-3 lg:shadow-lg lg:ring-1 lg:ring-mauve-950/5 dark:lg:bg-mauve-900 dark:lg:ring-white/10">
-          {groups.map((group, i) => (
-            <div
-              key={group.title}
-              className={clsx(
-                'flex flex-col gap-0.5 max-lg:items-center',
-                // hairline between groups, never above the first
-                i > 0 && 'mt-1 border-t border-mauve-950/5 pt-3 dark:border-white/10',
-              )}
-            >
-              {/* Same size as the links; hierarchy comes from weight + colour, not shrinking it. */}
-              <p className="px-3 pb-1 text-sm/6 font-medium text-mauve-500 dark:text-mauve-400">{group.title}</p>
-              {group.links.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="rounded-lg px-3 py-1.5 text-sm/6 font-medium whitespace-nowrap text-mauve-950 transition-colors hover:bg-mauve-950/5 dark:text-white dark:hover:bg-white/10"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          ))}
+      <NavbarLink href={href} className="lg:hidden">
+        {label}
+      </NavbarLink>
+
+      <div className={clsx('group relative max-lg:hidden', className)} {...props}>
+        <button
+          type="button"
+          aria-haspopup="true"
+          className="inline-flex w-full items-center justify-center gap-1.5 rounded-full px-3 py-1 text-base/6 font-medium text-mauve-950 transition-colors hover:bg-mauve-950/5 lg:group-hover:bg-mauve-950/5 dark:text-white dark:hover:bg-white/10 dark:lg:group-hover:bg-white/10"
+        >
+          {label}
+          {/* Kit ships a right-pointing chevron: rotate-90 = down (closed), -rotate-90 = up (open). */}
+          <ChevronIcon
+            className="rotate-90 transition-transform lg:group-hover:-rotate-90 lg:group-focus-within:-rotate-90"
+            aria-hidden="true"
+          />
+        </button>
+
+        {/*
+          `pt-3` rather than `mt-3` keeps the trigger and the panel touching, so the pointer
+          can travel down into the panel through the visual gap without it closing.
+        */}
+        <div className="lg:invisible lg:absolute lg:top-full lg:left-1/2 lg:z-20 lg:w-max lg:-translate-x-1/2 lg:pt-3 lg:opacity-0 lg:transition lg:group-hover:visible lg:group-hover:opacity-100 lg:group-focus-within:visible lg:group-focus-within:opacity-100">
+          <div className="flex flex-col gap-2 rounded-2xl p-2 lg:min-w-52 lg:bg-white lg:p-3 lg:shadow-lg lg:ring-1 lg:ring-mauve-950/5 dark:lg:bg-mauve-900 dark:lg:ring-white/10">
+            {groups.map((group, i) => (
+              <div
+                key={group.title}
+                className={clsx(
+                  'flex flex-col gap-0.5',
+                  // hairline between groups, never above the first
+                  i > 0 && 'mt-1 border-t border-mauve-950/5 pt-3 dark:border-white/10',
+                )}
+              >
+                {/* Same size as the links; hierarchy comes from weight + colour, not shrinking it. */}
+                <p className="px-3 pb-1 text-sm/6 font-medium text-mauve-500 dark:text-mauve-400">{group.title}</p>
+                {group.links.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="rounded-lg px-3 py-1.5 text-sm/6 font-medium whitespace-nowrap text-mauve-950 transition-colors hover:bg-mauve-950/5 dark:text-white dark:hover:bg-white/10"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

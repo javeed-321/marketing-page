@@ -78,9 +78,9 @@ export const SITE_FOOTER_CONTENT: SiteFooterContent = {
   ],
   socials: [
     { name: 'GitHub', href: 'https://github.com/documentation-ai', Icon: SocialGitHubIcon },
-    { name: 'Slack', href: '#', Icon: SocialSlackIcon },
+    { name: 'Slack', href: 'https://documentationai.slack.com/', Icon: SocialSlackIcon },
     { name: 'X', href: 'https://x.com/documentation_i', Icon: SocialXIcon },
-    { name: 'LinkedIn', href: '#', Icon: SocialLinkedInIcon },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/company/documentation-ai/', Icon: SocialLinkedInIcon },
     { name: 'Instagram', href: 'https://www.instagram.com/documentation_ai/', Icon: SocialInstagramIcon },
     { name: 'YouTube', href: 'https://www.youtube.com/@DocumentationAI', Icon: SocialYouTubeIcon },
   ],
