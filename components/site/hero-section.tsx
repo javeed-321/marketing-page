@@ -27,7 +27,7 @@ export const HERO_CONTENT: HeroContent = {
   subheadline:
     'Create self-updating product docs, knowledge bases, API references, and help centers. Make knowledge easy for AI agents and humans to access. Reduce support and accelerate onboarding.',
   primaryCta: { label: 'Start for Free', href: 'https://dashboard.documentation.ai/' },
-  secondaryCta: { label: 'Book a Demo', href: 'https://documentation.ai/get-a-demo' },
+  secondaryCta: { label: 'Book a Demo', href: '/get-a-demo' },
 }
 
 // Section 0 — Hero.

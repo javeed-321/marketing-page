@@ -19,23 +19,26 @@ const geist = Geist({ subsets: ['latin'], variable: '--font-geist', display: 'sw
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono', display: 'swap' })
 
-// One entry per page that actually exists under `app/solutions/`. Adding a link
-// here without a matching slug in `lib/solutions.ts` is a 404 — `dynamicParams`
-// is off on that route.
+// documentation.ai/solutions is one page, not a set of sub-pages, so every item
+// is an anchor into it. The three "By Teams" ids come from
+// `SOLUTION_AUDIENCES[].id` in `lib/solutions.ts` and match the live page's own
+// ids; all three "By Use Case" items deliberately share `#use-case`, the section
+// that covers all three of them.
 const SOLUTIONS: NavDropdownGroup[] = [
   {
-    title: 'By Team',
+    title: 'By Teams',
     links: [
-      { label: 'For Product Owners', href: '/solutions/product-owners' },
-      { label: 'For Developers', href: '/solutions/developers' },
-      { label: 'For Support Teams', href: '/solutions/support-teams' },
+      { label: 'For Product Owners', href: '/solutions#product-owners' },
+      { label: 'For Developers', href: '/solutions#developers' },
+      { label: 'For Support Teams', href: '/solutions#support-teams' },
     ],
   },
   {
     title: 'By Use Case',
     links: [
-      { label: 'Internal Knowledge Base', href: '/solutions/internal-knowledge' },
-      { label: 'All Solutions', href: '/solutions' },
+      { label: 'Developer Documentation', href: '/solutions#use-case' },
+      { label: 'Knowledge Base', href: '/solutions#use-case' },
+      { label: 'Product Documentation', href: '/solutions#use-case' },
     ],
   },
 ]

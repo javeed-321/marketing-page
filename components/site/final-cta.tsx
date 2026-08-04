@@ -19,7 +19,7 @@ export const FINAL_CTA_CONTENT: FinalCtaContent = {
   headline: 'Ready to build docs that Humans and AI love with Documentation.AI?',
   subheadline: 'Live in under 5 min · No credit card required',
   primaryCta: { label: 'Start for Free', href: 'https://dashboard.documentation.ai/' },
-  secondaryCta: { label: 'Book a Demo', href: 'https://documentation.ai/get-a-demo' },
+  secondaryCta: { label: 'Book a Demo', href: '/get-a-demo' },
 }
 
 // Section 8 — Final CTA band.

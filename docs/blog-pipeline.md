@@ -55,13 +55,24 @@ cover). Everything below `---` is what the *reader* sees.
 
 ### What you can write in the body
 
-Plain Markdown, plus anything MDX allows. There is **no component library to
-learn** — the body renders as prose:
+Plain Markdown, plus anything MDX allows. There is **one component to learn**;
+everything else renders as prose:
 
 - headings, paragraphs, lists, links, bold/italic
 - Markdown tables
 - fenced code blocks
 - inline SVG, which passes straight through (no asset step)
+- `<YouTube id="dQw4w9WgXcQ" title="Mintlify" />` for video
+
+**Why video is a tag and not an `<iframe>`.** YouTube draws its own poster —
+title strip, share and watch-later buttons, a "Watch on YouTube" badge — inside
+a cross-origin iframe, where CSS cannot reach it. The URL parameters that once
+suppressed it are gone: `showinfo` was removed in 2018 and `modestbranding` was
+deprecated in 2023. So `components/youtube.tsx` renders the thumbnail and play
+button itself and mounts the iframe only on click, with `autoplay=1` — the first
+frame YouTube paints is already-playing video, which has no overlay. The live
+site solves it the same way. A page ships zero iframes until a reader presses
+play, which also keeps eight YouTube players off every comparison post.
 
 `content/blog/sample-post/index.mdx` exercises every one of these. Read it before
 writing your first post; it is the conventions demo.

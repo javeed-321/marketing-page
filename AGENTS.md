@@ -39,8 +39,10 @@ Do not put `slug`, `permalink`, `readingTime`, `wordCount`, or `toc` in
 frontmatter — Velite computes them.
 
 Post bodies are **plain MDX** — headings, paragraphs, lists, Markdown tables,
-code fences, inline SVG. There is no custom component library to learn; the body
-is styled by Tailwind Typography (`.prose`, themed in `app/globals.css`).
+code fences, inline SVG — styled by Tailwind Typography (`.prose`, themed in
+`app/globals.css`). The single custom tag is `<YouTube id="…" title="…" />`,
+which renders a click-to-play thumbnail rather than a live iframe; write that
+instead of an `<iframe>` (see `docs/blog-pipeline.md` for why).
 `content/blog/sample-post/` demonstrates every supported element — it is a
 placeholder to delete before launch.
 

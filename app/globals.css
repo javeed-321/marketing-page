@@ -243,17 +243,63 @@
   border: 1px solid var(--color-card-border);
 }
 
-/* YouTube embeds. Posts carry a bare <iframe>, so the 16:9 box lives here
- * rather than being repeated as wrapper markup in every .mdx file. */
-.prose :where(iframe) {
+/* YouTube embeds. Posts carry <YouTube id="…" />, which renders a thumbnail
+ * facade and swaps in the real iframe on click (components/youtube.tsx). The
+ * 16:9 box lives here rather than in the component so embeds sit on the same
+ * rhythm as the article's other media. */
+.prose :where(.yt-embed) {
+  position: relative;
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  height: auto;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
+  overflow: hidden;
   border: 1px solid var(--color-card-border);
   border-radius: 8px;
+  background: #000;
+}
+
+.prose :where(.yt-embed) > :is(button, iframe) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* sddefault is 4:3, so it is cropped rather than letterboxed — same as live. */
+.prose :where(.yt-embed) img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
+}
+
+.prose :where(.yt-embed) svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 68px;
+  height: 48px;
+  transform: translate(-50%, -50%);
+}
+
+/* Charcoal at rest, red on hover — YouTube's own button behaviour. */
+.prose :where(.yt-embed) svg > path:first-child {
+  fill: #212121;
+  fill-opacity: 0.8;
+  transition:
+    fill 0.1s cubic-bezier(0.4, 0, 1, 1),
+    fill-opacity 0.1s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.prose :where(.yt-embed) button:hover svg > path:first-child {
+  fill: #f00;
+  fill-opacity: 1;
 }
 
 @layer components {

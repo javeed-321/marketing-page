@@ -2,6 +2,7 @@ import type { MDXComponents } from 'mdx/types'
 import * as runtime from 'react/jsx-runtime'
 
 import { siteConfig } from '@/lib/site'
+import { YouTube } from '@/components/youtube'
 
 /**
  * Renders a post body compiled by velite.
@@ -12,7 +13,8 @@ import { siteConfig } from '@/lib/site'
  *
  * Bodies are plain MDX: headings, paragraphs, lists, tables, code fences, images,
  * and inline SVG, styled by Tailwind Typography's `prose` classes (themed to the
- * site's tokens in `app/globals.css`). The only element override is `a`.
+ * site's tokens in `app/globals.css`). The only element override is `a`, and the
+ * only tag posts may use beyond Markdown is `<YouTube>`.
  */
 function getMDXComponent(code: string) {
   const fn = new Function(code)
@@ -40,6 +42,13 @@ const defaultComponents: MDXComponents = {
       </a>
     )
   },
+
+  /**
+   * `<YouTube id="…" title="…" />` — the one component posts may use. Written
+   * as a tag rather than a raw <iframe> because the rendered markup is a
+   * thumbnail facade, not an iframe at all until the reader clicks it.
+   */
+  YouTube,
 }
 
 export function MDXContent({ code, components }: { code: string; components?: MDXComponents }) {

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 }
 
 const DASHBOARD_URL = 'https://dashboard.documentation.ai/'
-const DEMO_URL = 'https://documentation.ai/get-a-demo'
+const DEMO_URL = '/get-a-demo'
 
 /**
  * Every paid figure on the page, in one place.
