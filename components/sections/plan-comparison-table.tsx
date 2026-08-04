@@ -17,15 +17,19 @@ function FeatureGroup<Plan extends string>({
 }) {
   return (
     <tbody>
-      <tr>
-        <th
-          colSpan={plans.length + 1}
-          scope="colgroup"
-          className="border-t border-b border-t-mauve-950/5 border-b-mauve-950/10 pt-14 pb-4 font-semibold text-mauve-950 dark:border-t-white/5 dark:border-b-white/10 dark:text-white"
-        >
-          {group.title}
-        </th>
-      </tr>
+      {/* Skipped for ungrouped tables — a flat "at a glance" table is one group
+        * with no title, and an empty banner row would add 3.5rem of dead space. */}
+      {group.title && (
+        <tr>
+          <th
+            colSpan={plans.length + 1}
+            scope="colgroup"
+            className="border-t border-b border-t-mauve-950/5 border-b-mauve-950/10 pt-14 pb-4 font-semibold text-mauve-950 dark:border-t-white/5 dark:border-b-white/10 dark:text-white"
+          >
+            {group.title}
+          </th>
+        </tr>
+      )}
       {group.features.map((feature) => (
         <tr key={String(feature.name)} className="group">
           <th
@@ -64,6 +68,9 @@ function FeatureGroup<Plan extends string>({
 export function PlanComparisonTable<const Plan extends string>({
   plans,
   features,
+  // The blog's "at a glance" tables compare tools, not features, so the corner
+  // cell needs to say what the rows are. Defaults to the pricing-page wording.
+  rowHeader = 'Compare features',
   className,
   ...props
 }: {
@@ -72,6 +79,7 @@ export function PlanComparisonTable<const Plan extends string>({
     title: ReactNode
     features: { name: ReactNode; value: ReactNode | Record<Plan, ReactNode> }[]
   }[]
+  rowHeader?: ReactNode
 } & ComponentProps<'section'>) {
   return (
     <section className={clsx('py-16', className)} {...props}>
@@ -86,7 +94,7 @@ export function PlanComparisonTable<const Plan extends string>({
           <thead>
             <tr>
               <th className="sticky top-(--scroll-padding-top) bg-mauve-100 py-5 pr-3 text-base/7 font-medium text-mauve-950 dark:bg-mauve-950 dark:text-white">
-                Compare features
+                {rowHeader}
               </th>
               {plans.map((plan, index) => (
                 <th

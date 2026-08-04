@@ -1,11 +1,8 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import type { Metadata } from 'next'
 
-import { Container } from '@/components/elements/container'
-import { Heading } from '@/components/elements/heading'
-import { Text } from '@/components/elements/text'
 import { JsonLd } from '@/components/json-ld'
 import { formatDate, getAuthorBySlug, getAuthors, getPostsByAuthor } from '@/lib/posts'
 import { absoluteUrl, organizationId, siteConfig } from '@/lib/site'
@@ -63,7 +60,7 @@ export default async function Page({ params }: Props) {
       url: authorUrl,
       ...(author.role && { jobTitle: author.role }),
       ...(author.bio && { description: author.bio }),
-      ...(author.avatar && { image: absoluteUrl(author.avatar) }),
+      ...(author.avatar && { image: absoluteUrl(author.avatar.src) }),
       ...(sameAs.length > 0 && { sameAs }),
       ...(author.knowsAbout?.length && { knowsAbout: author.knowsAbout }),
       worksFor: { '@id': organizationId },
@@ -71,57 +68,51 @@ export default async function Page({ params }: Props) {
   }
 
   return (
-    <Container className="py-16 sm:py-24">
+    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <JsonLd data={jsonLd} />
 
-      <div className="mx-auto w-full max-w-3xl">
-        <Link href="/blog" className="text-sm/6 font-medium text-mauve-500 transition-colors hover:text-red-500">
-          ← Blog
-        </Link>
+      <Link href="/blog" className="text-sm font-medium text-mauve-500 transition-colors hover:text-red-500">
+        ← Blog
+      </Link>
 
-        <header className="mt-6 flex flex-col items-start gap-6 sm:flex-row">
-          {author.avatar && (
-            <Image
-              src={author.avatar}
-              alt={author.name}
-              width={80}
-              height={80}
-              className="size-20 shrink-0 rounded-full border border-card-border bg-card object-cover"
-            />
-          )}
-          <div className="flex flex-col gap-3">
-            <Heading className="text-[2rem]/[1.15] sm:text-[2.5rem]/[1.1] lg:text-[3rem]/[1.1]">{author.name}</Heading>
-            {author.role && <p className="text-sm/6 text-mauve-500">{author.role}</p>}
-            {author.bio && (
-              <Text className="max-w-xl text-pretty">{author.bio}</Text>
-            )}
-          </div>
-        </header>
-
-        <h2 className="mt-12 font-display text-xl/7 font-medium tracking-[-0.02em] text-mauve-950 dark:text-white">
-          Articles by {author.name}
-        </h2>
-
-        {posts.length === 0 ? (
-          <Text className="mt-6">No published articles yet.</Text>
-        ) : (
-          <div className="mt-6 divide-y divide-card-border border-t border-card-border">
-            {posts.map((post) => (
-              <article key={post.slug} className="group py-6">
-                <Link href={post.permalink} className="flex flex-col gap-2">
-                  <p className="text-sm/6 text-mauve-500">
-                    {formatDate(post.date)} · {post.readingTime} min read
-                  </p>
-                  <h3 className="font-display text-lg/7 font-medium tracking-[-0.02em] text-balance text-mauve-950 transition-colors group-hover:text-red-500 dark:text-white">
-                    {post.title}
-                  </h3>
-                  <Text className="line-clamp-2 text-pretty">{post.excerpt}</Text>
-                </Link>
-              </article>
-            ))}
-          </div>
+      <header className="mt-6 mb-12 flex items-start gap-6">
+        {author.avatar && (
+          <Image
+            src={author.avatar.src}
+            alt={author.name}
+            width={80}
+            height={80}
+            className="rounded-full border border-card-border"
+          />
         )}
-      </div>
-    </Container>
+        <div>
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-mauve-950">{author.name}</h1>
+          {author.role && <p className="mt-1 text-mauve-700">{author.role}</p>}
+          {author.bio && <p className="mt-3 max-w-xl text-mauve-700">{author.bio}</p>}
+        </div>
+      </header>
+
+      <h2 className="mb-6 font-display text-xl font-semibold text-mauve-950">Articles by {author.name}</h2>
+
+      {posts.length === 0 ? (
+        <p className="text-mauve-700">No published articles yet.</p>
+      ) : (
+        <div className="divide-y divide-card-border">
+          {posts.map((post) => (
+            <article key={post.slug} className="group py-6 first:pt-0">
+              <Link href={post.permalink}>
+                <p className="text-sm text-mauve-500">
+                  {formatDate(post.date)} · {post.metadata.readingTime} min read
+                </p>
+                <h3 className="mt-1 font-display text-lg font-semibold tracking-tight text-mauve-950 transition-colors group-hover:text-red-500">
+                  {post.title}
+                </h3>
+                <p className="mt-1 line-clamp-2 text-mauve-700">{post.description}</p>
+              </Link>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }

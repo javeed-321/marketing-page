@@ -18,20 +18,13 @@ export function Document({
 
         // Long-form posts: larger body, a real heading hierarchy, plus the
         // tables, quotes, and code blocks the legal variant never needs.
-        variant === 'article' && [
-          'text-base/7',
-          '[&_h2]:font-display [&_h2]:text-2xl/8 [&_h2]:font-medium [&_h2]:tracking-[-0.02em] [&_h2]:text-mauve-950 [&_h2]:not-first:mt-12 dark:[&_h2]:text-white',
-          '[&_h3]:font-display [&_h3]:text-lg/7 [&_h3]:font-medium [&_h3]:text-mauve-950 [&_h3]:not-first:mt-8 dark:[&_h3]:text-white',
-          '[&_h4]:text-base/7 [&_h4]:font-semibold [&_h4]:text-mauve-950 [&_h4]:not-first:mt-6 dark:[&_h4]:text-white',
-          '[&_blockquote]:border-l-2 [&_blockquote]:border-red-500 [&_blockquote]:pl-5 [&_blockquote]:text-mauve-800 [&_blockquote]:italic dark:[&_blockquote]:text-mauve-300',
-          '[&_hr]:my-10 [&_hr]:border-card-border',
-          '[&_img]:rounded-xl [&_img]:border [&_img]:border-card-border',
-          '[&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-sm/6',
-          '[&_th]:border-b [&_th]:border-card-border [&_th]:px-3 [&_th]:py-2.5 [&_th]:font-semibold [&_th]:text-mauve-950 dark:[&_th]:text-white',
-          '[&_td]:border-b [&_td]:border-card-border [&_td]:px-3 [&_td]:py-2.5 [&_td]:align-top',
-          '[&_code]:rounded [&_code]:bg-card [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.875em] [&_code]:text-mauve-950 dark:[&_code]:text-white',
-          '[&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:border [&_pre]:border-card-border [&_pre]:bg-card [&_pre]:p-4 [&_pre_code]:bg-transparent [&_pre_code]:p-0',
-        ],
+        //
+        // MUST stay a single string. `clsx/lite` appends an argument only when
+        // `typeof arg === 'string'` — an array is truthy but silently dropped,
+        // which previously took every rule below with it and left article
+        // headings at browser defaults inheriting the body colour.
+        variant === 'article' &&
+          'text-base/7 [&_h2]:font-display [&_h2]:text-2xl/8 [&_h2]:font-medium [&_h2]:tracking-[-0.02em] [&_h2]:text-mauve-950 [&_h2]:not-first:mt-12 dark:[&_h2]:text-white [&_h3]:font-display [&_h3]:text-lg/7 [&_h3]:font-medium [&_h3]:text-mauve-950 [&_h3]:not-first:mt-8 dark:[&_h3]:text-white [&_h4]:text-base/7 [&_h4]:font-semibold [&_h4]:text-mauve-950 [&_h4]:not-first:mt-6 dark:[&_h4]:text-white [&_blockquote]:border-l-2 [&_blockquote]:border-red-500 [&_blockquote]:pl-5 [&_blockquote]:text-mauve-800 [&_blockquote]:italic dark:[&_blockquote]:text-mauve-300 [&_hr]:my-10 [&_hr]:border-card-border [&_img]:rounded-xl [&_img]:border [&_img]:border-card-border [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-sm/6 [&_th]:border-b [&_th]:border-card-border [&_th]:px-3 [&_th]:py-2.5 [&_th]:font-semibold [&_th]:text-mauve-950 dark:[&_th]:text-white [&_td]:border-b [&_td]:border-card-border [&_td]:px-3 [&_td]:py-2.5 [&_td]:align-top [&_code]:rounded [&_code]:bg-card [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.875em] [&_code]:text-mauve-950 dark:[&_code]:text-white [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:border [&_pre]:border-card-border [&_pre]:bg-card [&_pre]:p-4 [&_pre_code]:bg-transparent [&_pre_code]:p-0',
 
         className,
       )}

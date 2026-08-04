@@ -1,13 +1,10 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import type { Metadata } from 'next'
 
-import { Container } from '@/components/elements/container'
-import { Heading } from '@/components/elements/heading'
-import { Text } from '@/components/elements/text'
 import { JsonLd } from '@/components/json-ld'
-import { ArticleSections } from '@/components/site/article-sections'
+import { MDXContent } from '@/components/mdx'
 import { formatDate, getAuthorForPost, getPostBySlug, getPublishedPosts } from '@/lib/posts'
 import { absoluteUrl, organizationId, siteConfig, websiteId } from '@/lib/site'
 
@@ -29,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${post.title} — ${siteConfig.name}`,
     description: post.description,
     authors: [{ name: author.name, url: absoluteUrl(author.permalink) }],
-    alternates: { canonical: post.permalink },
+    alternates: { canonical: post.canonical ?? post.permalink },
     openGraph: {
       title: post.title,
       description: post.description,
@@ -77,8 +74,8 @@ export default async function Page({ params }: Props) {
         publisher: { '@id': organizationId },
         isPartOf: { '@id': websiteId },
         mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
-        ...(post.cover && { image: absoluteUrl(post.cover) }),
-        wordCount: post.wordCount,
+        ...(post.cover && { image: absoluteUrl(post.cover.src) }),
+        wordCount: post.metadata.wordCount,
         keywords: post.tags.join(', '),
         inLanguage: 'en',
       },
@@ -95,49 +92,52 @@ export default async function Page({ params }: Props) {
   }
 
   return (
-    <Container className="py-16 sm:py-24">
+    <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <JsonLd data={jsonLd} />
 
-      <article className="mx-auto w-full max-w-3xl">
-        <header className="flex flex-col gap-4">
-          <Link href="/blog" className="text-sm/6 font-medium text-mauve-500 transition-colors hover:text-red-500">
-            ← Blog
+      <header className="mb-10">
+        <Link href="/blog" className="text-sm font-medium text-mauve-500 transition-colors hover:text-red-500">
+          ← Blog
+        </Link>
+        <p className="mt-6 text-sm text-mauve-500">
+          {formatDate(post.date)} · {post.metadata.readingTime} min read
+        </p>
+        {/* 40px / weight 500 / -0.02em, measured from the live article h1 —
+            Tailwind's text-4xl + font-semibold read heavier than the original. */}
+        <h1 className="mt-3 font-display text-[2.25rem]/[1.2] font-medium tracking-[-0.02em] text-mauve-950 sm:text-[2.5rem]/[1.2]">
+          {post.title}
+        </h1>
+        <p className="mt-4 text-[1.0625rem]/[1.6] tracking-[-0.01em] text-mauve-700">{post.description}</p>
+        <p className="mt-4 text-sm text-mauve-500">
+          Written by{' '}
+          <Link href={author.permalink} className="font-medium text-mauve-700 transition-colors hover:text-red-500">
+            {author.name}
           </Link>
-          <p className="mt-2 text-sm/6 text-mauve-500">
-            {formatDate(post.date)} · {post.readingTime} min read
-          </p>
-          <Heading className="text-[2.25rem]/[1.15] sm:text-[2.75rem]/[1.1] lg:text-[3.25rem]/[1.1]">
-            {post.title}
-          </Heading>
-          <Text size="lg" className="text-pretty">
-            {post.excerpt}
-          </Text>
-          <p className="text-sm/6 text-mauve-500">
-            Written by{' '}
-            <Link href={author.permalink} className="font-medium transition-colors hover:text-red-500">
-              {author.name}
-            </Link>
-            {post.lastUpdated && <> · Updated {formatDate(post.lastUpdated)}</>}
-          </p>
-        </header>
+          {post.lastUpdated && <> · Updated {formatDate(post.lastUpdated)}</>}
+        </p>
+      </header>
 
-        {post.cover && (
-          <Image
-            src={post.cover}
-            alt={post.title}
-            width={1800}
-            height={945}
-            priority
-            className="mt-10 w-full rounded-xl border border-card-border bg-card"
-          />
-        )}
+      {post.cover && (
+        // Velite reads the intrinsic size and a blur placeholder off the file at
+        // build time, so the cover reserves its exact space before load.
+        <Image
+          src={post.cover.src}
+          alt={post.title}
+          width={post.cover.width}
+          height={post.cover.height}
+          placeholder={post.cover.blurDataURL ? 'blur' : 'empty'}
+          blurDataURL={post.cover.blurDataURL}
+          priority
+          className="mb-10 rounded-xl border border-card-border"
+        />
+      )}
 
-        {/* No `Document` wrapper here — each section applies its own styling, and
-            Document's descendant selectors would restyle every block's internals. */}
-        <div className="mt-10">
-          <ArticleSections sections={post.sections} />
-        </div>
-      </article>
-    </Container>
+      {/* Plain `prose`, not `prose-lg` — sizes are set explicitly in globals.css
+          to the live site's measurements, and prose-lg's em scales would
+          compound on top of them. */}
+      <div className="prose max-w-none">
+        <MDXContent code={post.body} />
+      </div>
+    </article>
   )
 }

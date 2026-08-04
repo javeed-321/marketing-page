@@ -40,3 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# velite content layer (generated on dev/build from content/)
+.velite
+public/static
+

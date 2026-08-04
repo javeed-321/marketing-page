@@ -1,15 +1,10 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { Text } from '@/components/elements/text'
 import { JsonLd } from '@/components/json-ld'
-import { BlogThreeColumnWithImages, type BlogPostCard } from '@/components/sections/blog-three-column-with-images'
 import { formatDate, getAuthorForPost, getPublishedPosts } from '@/lib/posts'
 import { absoluteUrl, organizationId, siteConfig, websiteId } from '@/lib/site'
-
-// Used when a post has no `cover` / an author has no `avatar` — the block's <img>
-// tags have no empty-src branch, so both fields must always resolve to something.
-const FALLBACK_COVER = '/img/photos/1.webp'
-const FALLBACK_AVATAR = '/img/avatars/10-size-160.webp'
 
 export const metadata: Metadata = {
   title: `Blog — ${siteConfig.name}`,
@@ -48,36 +43,60 @@ export default function Page() {
     })),
   }
 
-  // Map our Post/Author records onto the block's expected card shape.
-  const cards: BlogPostCard[] = posts.map((post) => {
-    const author = getAuthorForPost(post)
-    return {
-      id: post.slug,
-      title: post.title,
-      href: post.permalink,
-      description: post.excerpt,
-      imageUrl: post.cover ?? FALLBACK_COVER,
-      date: formatDate(post.date),
-      datetime: post.date,
-      category: { title: post.tags[0] ?? 'Documentation', href: '/blog' },
-      author: {
-        name: author.name,
-        role: author.role ?? '',
-        href: author.permalink,
-        imageUrl: author.avatar ?? FALLBACK_AVATAR,
-      },
-    }
-  })
-
   return (
-    <>
+    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <JsonLd data={jsonLd} />
 
+      <header className="mb-12">
+        <h1 className="font-display text-4xl font-semibold tracking-tight text-mauve-950">Blog</h1>
+        <p className="mt-3 text-lg text-mauve-700">{siteConfig.blogDescription}</p>
+      </header>
+
       {posts.length === 0 ? (
-        <Text className="py-24 text-center">No posts published yet.</Text>
+        <p className="text-mauve-700">No posts published yet.</p>
       ) : (
-        <BlogThreeColumnWithImages headline="From the blog" subheadline={siteConfig.blogDescription} posts={cards} />
+        <div className="divide-y divide-card-border">
+          {posts.map((post) => {
+            const author = getAuthorForPost(post)
+            return (
+              <article key={post.slug} className="group py-8 first:pt-0">
+                <div className="flex gap-6">
+                  <div className="flex-1">
+                    <Link href={post.permalink}>
+                      <p className="text-sm text-mauve-500">
+                        {formatDate(post.date)} · {post.metadata.readingTime} min read
+                      </p>
+                      <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-mauve-950 transition-colors group-hover:text-red-500">
+                        {post.title}
+                      </h2>
+                      <p className="mt-2 line-clamp-2 text-mauve-700">{post.description}</p>
+                    </Link>
+                    <p className="mt-3 text-sm text-mauve-500">
+                      Written by{' '}
+                      <Link href={author.permalink} className="font-medium transition-colors hover:text-red-500">
+                        {author.name}
+                      </Link>
+                    </p>
+                  </div>
+                  {post.cover && (
+                    <Link href={post.permalink} className="hidden shrink-0 sm:block">
+                      <Image
+                        src={post.cover.src}
+                        alt=""
+                        width={180}
+                        height={101}
+                        placeholder={post.cover.blurDataURL ? 'blur' : 'empty'}
+                        blurDataURL={post.cover.blurDataURL}
+                        className="rounded-lg border border-card-border object-cover"
+                      />
+                    </Link>
+                  )}
+                </div>
+              </article>
+            )
+          })}
+        </div>
       )}
-    </>
+    </div>
   )
 }

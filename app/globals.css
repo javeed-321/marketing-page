@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 
 /*
  * Force light mode only.
@@ -52,6 +53,163 @@
       transform: translateX(calc(-50% - 1.25rem));
     }
   }
+}
+
+/*
+ * Blog post bodies.
+ *
+ * Post MDX is rendered by Tailwind Typography, not by per-element classes — the
+ * body is authored as plain Markdown, so there is no component to hang classes
+ * on. These variables re-point `prose` at the site's own tokens; the colours are
+ * the same warm palette the rest of the site uses.
+ */
+/*
+ * Values below are measured from documentation.ai's own article styles, not
+ * chosen. Tailwind Typography's defaults are a size larger and much heavier —
+ * `prose-lg` body at 18px, headings at weight 700/800 — which is why the port
+ * initially read noticeably bigger and lighter than the live site.
+ *
+ *   body : 16px / 1.6 / -0.01em / weight 400 / near-black
+ *   h2   : 32px / 1.3 / -0.02em / weight 500
+ *   h3   : 20px / 1.3 / -0.02em / weight 500
+ *   links: same colour as body, underlined
+ */
+.prose {
+  --tw-prose-body: var(--color-mauve-950);
+  --tw-prose-headings: var(--color-mauve-950);
+  --tw-prose-links: var(--color-mauve-950);
+  --tw-prose-bold: var(--color-mauve-950);
+  /* The live site gives list markers no colour of their own — the <li> carries
+   * the same preset as body text, so ::marker simply inherits it. */
+  --tw-prose-counters: var(--color-mauve-950);
+  --tw-prose-bullets: var(--color-mauve-950);
+  --tw-prose-quotes: var(--color-mauve-800);
+  --tw-prose-quote-borders: var(--color-red-500);
+  --tw-prose-code: var(--color-mauve-950);
+  --tw-prose-pre-bg: var(--color-card);
+  --tw-prose-pre-code: var(--color-mauve-950);
+  --tw-prose-th-borders: var(--color-card-border);
+  --tw-prose-td-borders: var(--color-card-border);
+  --tw-prose-hr: var(--color-card-border);
+  --tw-prose-captions: var(--color-mauve-700);
+
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.prose :where(p, li) {
+  letter-spacing: -0.01em;
+}
+
+.prose :where(h2, h3, h4) {
+  font-family: var(--font-geist), sans-serif;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  /* rehype-slug gives every heading an id, so anchor links land below the
+   * sticky navbar rather than under it. */
+  scroll-margin-top: 5rem;
+}
+
+/*
+ * Headings keep their own weight even when the text is bold-wrapped.
+ *
+ * documentation.ai's markdown export writes headings as `### **1. Mintlify**`
+ * — 120 of them across these posts — although the live page renders a plain
+ * `<h3>` with no <strong> at weight 500. Tailwind Typography escalates
+ * `strong` inside a heading to 800 (h2) / 700 (h3, h4), which is where the
+ * extra boldness came from; this hands the weight back to the heading.
+ */
+.prose :where(h1 strong, h2 strong, h3 strong, h4 strong) {
+  font-weight: inherit;
+}
+
+.prose :where(h2) {
+  font-size: 2rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose :where(h3) {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose :where(h4) {
+  font-size: 1.0625rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Links carry the body colour on the live site — the red is reserved for
+ * interactive chrome, not running prose. */
+.prose :where(a) {
+  font-weight: 600;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/*
+ * Tables, measured from the live article table:
+ *   table  1px solid #99999940, 8px radius
+ *   th/td  10px padding, a border on every internal edge
+ *   th     #9999991a background
+ *
+ * Tailwind Typography draws horizontal rules only — no vertical borders, no
+ * header fill, no radius — so the grid is rebuilt here and Tailwind's own
+ * thead/tbody rules are zeroed out to stop them doubling up.
+ */
+.prose :where(table) {
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid rgb(153 153 153 / 0.25);
+  border-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+.prose :where(thead),
+.prose :where(tbody tr) {
+  border-bottom: 0;
+}
+
+.prose :where(th),
+.prose :where(td) {
+  padding: 10px;
+  vertical-align: top;
+}
+
+.prose :where(th) {
+  background-color: rgb(153 153 153 / 0.1);
+  font-weight: 600;
+}
+
+.prose :where(tr + tr) :where(th, td) {
+  border-top: 1px solid rgb(153 153 153 / 0.25);
+}
+
+.prose :where(th + th, th + td, td + th, td + td) {
+  border-left: 1px solid rgb(153 153 153 / 0.25);
+}
+
+.prose :where(pre) {
+  border: 1px solid var(--color-card-border);
+}
+
+/* YouTube embeds. Posts carry a bare <iframe>, so the 16:9 box lives here
+ * rather than being repeated as wrapper markup in every .mdx file. */
+.prose :where(iframe) {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  border: 1px solid var(--color-card-border);
+  border-radius: 8px;
 }
 
 @layer components {

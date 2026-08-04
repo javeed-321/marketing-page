@@ -1,0 +1,16 @@
+name: Roop Reddy
+slug: roopreddy
+avatar: ./roopreddy.png
+role: Co-Founder, Documentation.AI
+bio: >-
+  Building Documentation.AI — the AI-native documentation and knowledge
+  platform. Writes about documentation workflows, docs-as-code, and
+  AI-native content. (Placeholder bio — replace with the real one.)
+# avatar: ./roop-reddy.png        # add a square photo next to this file
+# url: https://example.com        # personal site
+# linkedin: https://www.linkedin.com/in/...
+# twitter: https://x.com/...
+# knowsAbout:                     # E-E-A-T topic signals for Person schema
+#   - Documentation workflows
+#   - Docs-as-code
+#   - AI-native content

@@ -1,5 +1,5 @@
 import { clsx } from 'clsx/lite'
-import type { ComponentProps, ComponentType, ReactNode } from 'react'
+import type { ComponentProps, ComponentType } from 'react'
 
 import { Container } from '@/components/elements/container'
 import { Subheading } from '@/components/elements/subheading'
@@ -8,25 +8,7 @@ import { LlmsTxtIcon } from '@/components/icons/framer/llms-txt-icon'
 import { McpServerIcon } from '@/components/icons/framer/mcp-server-icon'
 import { StructuredContentIcon } from '@/components/icons/framer/structured-content-icon'
 import { RefreshCwIcon } from '@/components/icons/refresh-cw-icon'
-
-export function FeatureItem({
-  icon,
-  headline,
-  subheadline,
-  className,
-}: { icon: ReactNode; headline: ReactNode; subheadline: ReactNode } & ComponentProps<'div'>) {
-  return (
-    <div className={clsx('flex flex-col gap-8 py-8 lg:py-10', className)}>
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-mauve-950 dark:bg-white/10 dark:text-white">
-        {icon}
-      </div>
-      <div className="flex flex-col gap-2">
-        <h3 className="font-display text-lg/normal font-normal text-mauve-950 dark:text-white">{headline}</h3>
-        <div className="flex flex-col gap-4 text-sm/5 text-mauve-700 dark:text-mauve-400">{subheadline}</div>
-      </div>
-    </div>
-  )
-}
+import { BentoCard } from '@/components/sections/bento-three-column'
 
 export type IconFeature = {
   /** Icon component itself, e.g. McpServerIcon — rendered at size-5 by the block. */
@@ -118,8 +100,9 @@ export function BuiltForAI({
           </div>
 
           {features.map((feature, i) => (
-            <FeatureItem
+            <BentoCard
               key={feature.title}
+              variant="bare"
               className={POSITIONS[i]}
               icon={<feature.Icon className="size-5" />}
               headline={feature.title}
