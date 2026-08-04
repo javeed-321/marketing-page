@@ -44,53 +44,75 @@ export default function Page() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-6xl px-6 lg:px-10">
       <JsonLd data={jsonLd} />
 
-      <header className="mb-12">
-        <h1 className="font-display text-4xl font-semibold tracking-tight text-mauve-950">Blog</h1>
-        <p className="mt-3 text-lg text-mauve-700">{siteConfig.blogDescription}</p>
+      {/* 40px / weight 500 / -0.02em, measured from the live /blog heading. */}
+      <header className="border-b border-card-border py-16 sm:py-20">
+        <h1 className="font-display text-[2.25rem]/[1.2] font-medium tracking-[-0.02em] text-mauve-950 sm:text-[2.5rem]/[1.2]">
+          {siteConfig.blogTitle}
+        </h1>
       </header>
 
       {posts.length === 0 ? (
-        <p className="text-mauve-700">No posts published yet.</p>
+        <p className="py-24 text-center text-mauve-700">No posts published yet.</p>
       ) : (
-        <div className="divide-y divide-card-border">
+        // Two per row from `sm` up, matching the live grid.
+        <div className="grid grid-cols-1 gap-x-10 gap-y-16 py-16 sm:grid-cols-2">
           {posts.map((post) => {
             const author = getAuthorForPost(post)
             return (
-              <article key={post.slug} className="group py-8 first:pt-0">
-                <div className="flex gap-6">
-                  <div className="flex-1">
-                    <Link href={post.permalink}>
-                      <p className="text-sm text-mauve-500">
-                        {formatDate(post.date)} · {post.metadata.readingTime} min read
-                      </p>
-                      <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-mauve-950 transition-colors group-hover:text-red-500">
-                        {post.title}
-                      </h2>
-                      <p className="mt-2 line-clamp-2 text-mauve-700">{post.description}</p>
+              <article key={post.slug} className="group flex flex-col gap-5">
+                {post.cover && (
+                  <Link href={post.permalink} className="block overflow-hidden rounded-xl">
+                    <Image
+                      src={post.cover.src}
+                      alt=""
+                      width={post.cover.width}
+                      height={post.cover.height}
+                      placeholder={post.cover.blurDataURL ? 'blur' : 'empty'}
+                      blurDataURL={post.cover.blurDataURL}
+                      className="aspect-[16/9] w-full object-cover"
+                    />
+                  </Link>
+                )}
+
+                <div className="flex flex-col gap-3">
+                  {/* Card title: 20px / weight 500 / -0.01em / 1.3, no underline. */}
+                  <h2 className="font-display text-[1.25rem]/[1.3] font-medium tracking-[-0.01em] text-mauve-950">
+                    <Link href={post.permalink} className="transition-colors group-hover:text-red-500">
+                      {post.title}
                     </Link>
-                    <p className="mt-3 text-sm text-mauve-500">
-                      Written by{' '}
-                      <Link href={author.permalink} className="font-medium transition-colors hover:text-red-500">
+                  </h2>
+                  <p className="line-clamp-2 text-[0.875rem]/[1.4286] text-mauve-700">{post.description}</p>
+                </div>
+
+                {/* Byline block: two labelled columns, as on the live cards. */}
+                <div className="mt-auto grid grid-cols-2 gap-4 pt-1">
+                  <div className="flex flex-col gap-2">
+                    <p className="text-[0.875rem]/[1.4286] text-mauve-700">Written by</p>
+                    <div className="flex items-center gap-2">
+                      {author.avatar && (
+                        <Image
+                          src={author.avatar.src}
+                          alt=""
+                          width={24}
+                          height={24}
+                          className="size-6 shrink-0 rounded-full object-cover"
+                        />
+                      )}
+                      <Link href={author.permalink} className="text-base/[1.5] text-mauve-700 hover:text-red-500">
                         {author.name}
                       </Link>
-                    </p>
+                    </div>
                   </div>
-                  {post.cover && (
-                    <Link href={post.permalink} className="hidden shrink-0 sm:block">
-                      <Image
-                        src={post.cover.src}
-                        alt=""
-                        width={180}
-                        height={101}
-                        placeholder={post.cover.blurDataURL ? 'blur' : 'empty'}
-                        blurDataURL={post.cover.blurDataURL}
-                        className="rounded-lg border border-card-border object-cover"
-                      />
-                    </Link>
-                  )}
+
+                  <div className="flex flex-col gap-2">
+                    <p className="text-[0.875rem]/[1.4286] text-mauve-700">Published</p>
+                    <time dateTime={post.date} className="text-base/[1.5] text-mauve-700">
+                      {formatDate(post.date)}
+                    </time>
+                  </div>
                 </div>
               </article>
             )

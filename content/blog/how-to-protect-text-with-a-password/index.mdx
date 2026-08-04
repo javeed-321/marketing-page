@@ -123,27 +123,27 @@ Protecting files is a different problem from protecting documentation. If it's a
 
 Method |, Best Use Case |, Control Level |, Tracking, Shared password |
 
-Small teams, pre-launch drafts | 
+Small teams, pre-launch drafts |
 
 Medium |
 
 None
 
-Role-based access (RBAC) | 
+Role-based access (RBAC) |
 
-Teams, customers, multi-tier products | 
+Teams, customers, multi-tier products |
 
 High |, High, SSO and Authentication |, Enterprise and SaaS |, Very high |, Very high, Token-based links |
 
-Previews, one-time access | 
+Previews, one-time access |
 
 Medium |
 
 Medium
 
-Secure file sharing tools | 
+Secure file sharing tools |
 
-External PDFs, reports, decks | 
+External PDFs, reports, decks |
 
 High |
 
@@ -153,7 +153,7 @@ Very high
 
 Always enforce access at the server level, not just in the interface. If the content can be reached by modifying a URL or inspecting network traffic, it isn't protected; it's just hidden.
 
-Avoid storing sensitive information in plain text in documentation that isn't fully gated, even internally. And when passwords are stored, follow the [OWASP Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html): never keep them in plaintext, add a unique salt, and hash with a slow algorithm such as Argon2id or bcrypt with a work factor of 10 or more. Use short-lived tokens for any temporary or link-based sharing, because tokens without expiration accumulate risk over time. Add rate limiting to authentication endpoints to prevent brute-force attacks. Monitor access patterns, because unusual spikes to sensitive sections are worth investigating. And rotate shared passwords regularly. 
+Avoid storing sensitive information in plain text in documentation that isn't fully gated, even internally. And when passwords are stored, follow the [OWASP Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html): never keep them in plaintext, add a unique salt, and hash with a slow algorithm such as Argon2id or bcrypt with a work factor of 10 or more. Use short-lived tokens for any temporary or link-based sharing, because tokens without expiration accumulate risk over time. Add rate limiting to authentication endpoints to prevent brute-force attacks. Monitor access patterns, because unusual spikes to sensitive sections are worth investigating. And rotate shared passwords regularly.
 
 For any password-based access, current NIST guidance (Digital Identity Guidelines, [SP 800-63B Rev. 4, 2024](https://pages.nist.gov/800-63-4/sp800-63b.html)) favors length over complexity: require at least 15 characters, allow up to 64, and do not force periodic resets or special-character rules, since those push people toward weaker, reused passwords. Reset only when there is evidence a credential has been compromised.
 
