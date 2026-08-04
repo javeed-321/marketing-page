@@ -1,73 +1,127 @@
-import Image from 'next/image'
+import type { Metadata } from 'next'
 
 import { ButtonLink, PlainButtonLink, SoftButtonLink } from '@/components/elements/button'
-import { Logo, LogoGrid } from '@/components/elements/logo-grid'
-import { ChevronIcon } from '@/components/icons/chevron-icon'
 import { CallToActionSimpleCentered } from '@/components/sections/call-to-action-simple-centered'
-import { FAQsAccordion, Faq } from '@/components/sections/faqs-accordion'
 import { PlanComparisonTable } from '@/components/sections/plan-comparison-table'
-import { Plan, PricingHeroMultiTier } from '@/components/sections/pricing-hero-multi-tier'
-import { TestimonialTwoColumnWithLargePhoto } from '@/components/sections/testimonial-two-column-with-large-photo'
+import { PricingFourTierDivided, Tier } from '@/components/sections/pricing-four-tier-divided'
+import { TrustedBy, TRUSTED_BY_CONTENT } from '@/components/site/trusted-by'
+import { siteConfig } from '@/lib/site'
 
-function plans(option: string) {
+const PRICING_SUBHEADLINE =
+  'Simple, predictable pricing for teams that want to create, publish, search, and maintain better documentation with AI.'
+
+export const metadata: Metadata = {
+  title: `Pricing — ${siteConfig.name}`,
+  description: PRICING_SUBHEADLINE,
+  alternates: { canonical: '/pricing' },
+  openGraph: {
+    title: `Pricing — ${siteConfig.name}`,
+    description: PRICING_SUBHEADLINE,
+    url: '/pricing',
+    type: 'website',
+  },
+}
+
+const DASHBOARD_URL = 'https://dashboard.documentation.ai/'
+const DEMO_URL = 'https://documentation.ai/get-a-demo'
+
+/**
+ * Every paid figure on the page, in one place.
+ *
+ * Both tabs quote a per-month figure: `monthly` is the list price, `yearly` is
+ * the same plan billed annually (the 20% saving the toggle advertises). Starter
+ * ($0) and Enterprise (Custom Pricing) read the same on both tabs, so they are
+ * not listed here.
+ */
+const PRICES = {
+  Standard: { monthly: '$69', yearly: '$55' },
+  Pro: { monthly: '$199', yearly: '$159' },
+} as const
+
+function plans(billing: 'monthly' | 'yearly') {
+  // Both tabs read "/month"; only the fine print after it changes.
+  const billedYearly = billing === 'yearly' ? '(billed yearly)' : undefined
+
   return (
     <>
-      <Plan
+      <Tier
         name="Starter"
-        price={option === 'Monthly' ? '$12' : '$120'}
-        period={option === 'Monthly' ? '/month' : '/year'}
-        subheadline={<p>Small teams getting started with shared inboxes</p>}
+        price="$0"
+        period="/forever"
+        subheadline={<p>For individuals and early projects getting started with AI-powered documentation.</p>}
         features={[
-          'Shared inbox for up to 2 mailboxes',
-          'Tagging & assignment',
-          'Private notes',
-          'Automatic replies',
-          'Email support',
+          'Core documentation platform',
+          '10,000 AI credits (Trial credits)',
+          'Visual web editor, API playground, MCP server, Custom domain, AI Agent for Writing',
+          'Self-updating AI workflows',
         ]}
         cta={
-          <SoftButtonLink href="#" size="lg">
-            Start free trial
+          <SoftButtonLink href={DASHBOARD_URL} size="lg">
+            Get Started
           </SoftButtonLink>
         }
       />
-      <Plan
-        name="Growth"
-        price={option === 'Monthly' ? '$49' : '$490'}
-        period={option === 'Monthly' ? '/month' : '/year'}
-        subheadline={<p>Growing teams needing collaboration and insights</p>}
-        badge="Most popular"
+      <Tier
+        name="Standard"
+        price={PRICES.Standard[billing]}
+        period="/month"
+        note={billedYearly}
+        subheadline={<p>For startups and small teams that want professional documentation with AI built in.</p>}
         features={[
           'Everything in Starter',
-          'Inbox Agent',
-          'Unlimited mailboxes',
-          'Collision detection',
-          'Snippets and templates',
-          'Reporting dashboard',
-          'Slack integration',
+          '10,000 AI credits per month',
+          'Password-protected documentation',
+          'External Sources for AI Assistant',
+          'Embed AI Assistant outside docs',
+          'PDF Export, Slack support',
         ]}
         cta={
-          <ButtonLink href="#" size="lg">
-            Start free trial
+          <SoftButtonLink href={DASHBOARD_URL} size="lg">
+            Upgrade
+          </SoftButtonLink>
+        }
+      />
+      <Tier
+        name="Pro"
+        price={PRICES.Pro[billing]}
+        period="/month"
+        note={billedYearly}
+        subheadline={<p>For growing teams using docs across product, support, onboarding, and AI workflows.</p>}
+        features={[
+          'Everything in Standard',
+          '30,000 AI credits per month',
+          'Private docs with user login (JWT/OAuth)',
+          'Advanced analytics',
+          'Role-based permissions',
+          'Priority migration support',
+          'Private Slack channel, Priority support',
+        ]}
+        cta={
+          <ButtonLink href={DASHBOARD_URL} size="lg">
+            Upgrade
           </ButtonLink>
         }
       />
-      <Plan
-        name="Pro"
-        price={option === 'Monthly' ? '$299' : '$2990'}
-        period={option === 'Monthly' ? '/month' : '/year'}
-        subheadline={<p>Support-focused organizations and larger teams</p>}
+      <Tier
+        name="Enterprise"
+        price="Custom Pricing"
+        priceSize="sm"
+        subheadline={<p>For teams needing advanced security, governance, custom AI usage, and dedicated support.</p>}
         features={[
-          'Everything in Growth',
-          'Custom roles & permissions',
-          'Automation engine',
-          'API access',
-          'SLA tracking',
-          'SSO support',
-          'SOC 2 compliance',
+          'Everything in Pro',
+          'SSO with SAML/OIDC',
+          'SCIM provisioning',
+          'Security and legal review',
+          'Custom SLAs',
+          'Dedicated support',
+          'White-glove migration support',
+          'White-glove implementation support',
+          'Custom contracts and invoicing',
+          'Custom integrations',
         ]}
         cta={
-          <SoftButtonLink href="#" size="lg">
-            Start free trial
+          <SoftButtonLink href={DEMO_URL} size="lg">
+            Get a Demo
           </SoftButtonLink>
         }
       />
@@ -78,269 +132,228 @@ function plans(option: string) {
 export default function Page() {
   return (
     <>
-      {/* Hero */}
-      <PricingHeroMultiTier
+      {/* Pricing hero — four tiers split by column rules, monthly/yearly tabs */}
+      <PricingFourTierDivided
         id="pricing"
         headline="Pricing"
-        subheadline={
-          <p>
-            Simplify your shared inbox, collaborate effortlessly, and give every customer a reply that feels personal,
-            even if it was written by a bot.
-          </p>
-        }
-        options={['Monthly', 'Yearly']}
-        plans={{ Monthly: plans('Monthly'), Yearly: plans('Yearly') }}
-        footer={
-          <LogoGrid>
-            <Logo>
-              <Image
-                src="/img/logos/9-color-black-height-32.svg"
-                className="dark:hidden"
-                alt=""
-                width={51}
-                height={32}
-              />
-              <Image
-                src="/img/logos/9-color-white-height-32.svg"
-                className="not-dark:hidden"
-                alt=""
-                width={51}
-                height={32}
-              />
-            </Logo>
-            <Logo>
-              <Image
-                src="/img/logos/10-color-black-height-32.svg"
-                className="dark:hidden"
-                alt=""
-                width={70}
-                height={32}
-              />
-              <Image
-                src="/img/logos/10-color-white-height-32.svg"
-                className="not-dark:hidden"
-                alt=""
-                width={70}
-                height={32}
-              />
-            </Logo>
-            <Logo>
-              <Image
-                src="/img/logos/11-color-black-height-32.svg"
-                className="dark:hidden"
-                alt=""
-                width={100}
-                height={32}
-              />
-              <Image
-                src="/img/logos/11-color-white-height-32.svg"
-                className="not-dark:hidden"
-                alt=""
-                width={100}
-                height={32}
-              />
-            </Logo>
-            <Logo>
-              <Image
-                src="/img/logos/12-color-black-height-32.svg"
-                className="dark:hidden"
-                alt=""
-                width={85}
-                height={32}
-              />
-              <Image
-                src="/img/logos/12-color-white-height-32.svg"
-                className="not-dark:hidden"
-                alt=""
-                width={85}
-                height={32}
-              />
-            </Logo>
-            <Logo>
-              <Image
-                src="/img/logos/13-color-black-height-32.svg"
-                className="dark:hidden"
-                alt=""
-                width={75}
-                height={32}
-              />
-              <Image
-                src="/img/logos/13-color-white-height-32.svg"
-                className="not-dark:hidden"
-                alt=""
-                width={75}
-                height={32}
-              />
-            </Logo>
-            <Logo>
-              <Image
-                src="/img/logos/8-color-black-height-32.svg"
-                className="dark:hidden"
-                alt=""
-                width={85}
-                height={32}
-              />
-              <Image
-                src="/img/logos/8-color-white-height-32.svg"
-                className="not-dark:hidden"
-                alt=""
-                width={85}
-                height={32}
-              />
-            </Logo>
-          </LogoGrid>
-        }
+        subheadline={<p>{PRICING_SUBHEADLINE}</p>}
+        savingLabel="(Save 20%)"
+        tiers={{ monthly: plans('monthly'), yearly: plans('yearly') }}
       />
-      {/* Plan Comparison Table */}
+      {/* Plan comparison — groups and rows follow the live pricing table */}
       <PlanComparisonTable
-        id="pricing"
-        plans={['Starter', 'Growth', 'Pro']}
+        id="compare"
+        plans={['Starter', 'Standard', 'Pro', 'Enterprise']}
         features={[
           {
-            title: 'Collaboration',
+            title: 'Write & Publish',
             features: [
               {
-                name: 'Shared inboxes',
-                value: { Starter: '2', Growth: 'Unlimited', Pro: 'Unlimited' },
-              },
-              { name: 'Private notes', value: true },
-              { name: 'Tagging & assignment', value: true },
-              {
-                name: 'Collision detection',
-                value: { Starter: false, Growth: true, Pro: true },
+                name: 'Editor seats',
+                value: { Starter: '1', Standard: '3', Pro: '10', Enterprise: 'Custom' },
               },
               {
-                name: 'Real-time activity indicators',
-                value: { Starter: false, Growth: true, Pro: true },
+                name: 'Documentation Sites',
+                value: { Starter: '1', Standard: '2', Pro: '4', Enterprise: 'Custom' },
+              },
+              { name: 'Visual web editor', value: true },
+              { name: 'Docs as code', value: true },
+              { name: 'Bidirectional git sync', value: true },
+              { name: 'Live preview', value: true },
+              { name: 'Auto-generated OpenAPI pages', value: true },
+              { name: 'API playground', value: true },
+              {
+                name: 'PDF export',
+                value: { Starter: false, Standard: true, Pro: true, Enterprise: true },
+              },
+              { name: 'Custom domain', value: true },
+              { name: 'SEO optimizations', value: true },
+              { name: 'LLM optimizations / llms.txt', value: true },
+              { name: 'Subfolders', value: true },
+            ],
+          },
+          {
+            title: 'AI-powered writing and editing',
+            features: [
+              { name: 'AI-powered writing and editing', value: true },
+              {
+                name: 'AI credits',
+                value: {
+                  Starter: '10,000 (Trial)',
+                  Standard: '10,000 / month',
+                  Pro: '30,000 / month',
+                  Enterprise: 'Custom',
+                },
+              },
+              { name: 'AI Agent', value: true },
+              { name: 'Authoring MCP Server', value: true },
+            ],
+          },
+          {
+            title: 'AI Assistant & Workflows',
+            features: [
+              { name: 'AI Assistant', value: true },
+              { name: 'AI workflows for docs updates', value: true },
+              { name: 'Docs MCP server', value: true },
+              {
+                name: 'Connect external sources (coming soon)',
+                value: { Starter: false, Standard: true, Pro: true, Enterprise: true },
               },
               {
-                name: 'Internal chat',
-                value: { Starter: false, Growth: true, Pro: true },
+                name: 'Embed AI Assistant (coming soon)',
+                value: { Starter: false, Standard: false, Pro: true, Enterprise: true },
               },
             ],
           },
           {
-            title: 'Automation',
+            title: 'Analytics & Insights',
             features: [
-              { name: 'Automatic replies', value: true },
               {
-                name: 'Inbox Agent',
-                value: { Starter: false, Growth: true, Pro: true },
+                name: 'Standard analytics',
+                value: { Starter: false, Standard: true, Pro: true, Enterprise: true },
               },
               {
-                name: 'Automation engine',
-                value: { Starter: false, Growth: true, Pro: true },
+                name: 'AI answer analytics',
+                value: { Starter: false, Standard: false, Pro: true, Enterprise: true },
               },
               {
-                name: 'Snippets and templates',
-                value: { Starter: false, Growth: true, Pro: true },
-              },
-              {
-                name: 'SLA tracking',
-                value: { Starter: false, Growth: false, Pro: true },
+                name: 'User feedback',
+                value: { Starter: false, Standard: false, Pro: true, Enterprise: true },
               },
             ],
           },
           {
-            title: 'Team Management',
+            title: 'Customizations',
             features: [
               {
-                name: 'Unlimited users',
-                value: { Starter: 'Up to 5', Growth: true, Pro: true },
+                name: 'Custom navigation',
+                value: { Starter: false, Standard: false, Pro: true, Enterprise: true },
               },
               {
-                name: 'Reporting dashboard',
-                value: { Starter: false, Growth: true, Pro: true },
+                name: 'Custom system CSS and JS',
+                value: { Starter: false, Standard: false, Pro: true, Enterprise: true },
               },
               {
-                name: 'Slack integration',
-                value: { Starter: false, Growth: true, Pro: true },
+                name: 'Built-in components library',
+                value: { Starter: false, Standard: false, Pro: true, Enterprise: true },
               },
               {
-                name: 'Roles & permissions',
-                value: { Starter: false, Growth: false, Pro: true },
-              },
-              {
-                name: 'SSO support',
-                value: { Starter: false, Growth: false, Pro: true },
+                name: 'Remove footer branding',
+                value: { Starter: false, Standard: false, Pro: false, Enterprise: true },
               },
             ],
           },
           {
-            title: 'Support',
+            title: 'Integrations',
             features: [
-              { name: 'Email support', value: true },
               {
-                name: 'Priority response',
-                value: { Starter: false, Growth: true, Pro: true },
+                name: 'API keys',
+                value: { Starter: false, Standard: true, Pro: true, Enterprise: true },
+              },
+              { name: 'OpenAPI import', value: true },
+              {
+                name: 'Third-party integrations',
+                value: { Starter: false, Standard: true, Pro: true, Enterprise: true },
+              },
+            ],
+          },
+          {
+            title: 'Authentication',
+            features: [
+              {
+                name: 'Password-protected docs',
+                value: { Starter: false, Standard: true, Pro: true, Enterprise: true },
               },
               {
-                name: 'Dedicated manager',
-                value: { Starter: false, Growth: false, Pro: true },
+                name: 'Private docs with user login (JWT/OAuth)',
+                value: { Starter: false, Standard: false, Pro: true, Enterprise: true },
+              },
+              {
+                name: 'Role-based permissions',
+                value: { Starter: false, Standard: false, Pro: true, Enterprise: true },
+              },
+              {
+                name: 'SSO with SAML/OIDC',
+                value: { Starter: false, Standard: false, Pro: false, Enterprise: true },
+              },
+              {
+                name: 'SCIM provisioning',
+                value: { Starter: false, Standard: false, Pro: false, Enterprise: true },
+              },
+            ],
+          },
+          {
+            title: 'Security, Support, Legal & Compliance',
+            features: [
+              {
+                name: 'Community',
+                value: { Starter: true, Standard: false, Pro: false, Enterprise: false },
+              },
+              {
+                name: 'Slack support',
+                value: { Starter: false, Standard: true, Pro: true, Enterprise: true },
+              },
+              {
+                name: 'Private Slack channel',
+                value: { Starter: false, Standard: false, Pro: true, Enterprise: true },
+              },
+              {
+                name: 'Priority support',
+                value: { Starter: false, Standard: false, Pro: true, Enterprise: true },
+              },
+              {
+                name: 'Dedicated success support',
+                value: { Starter: false, Standard: false, Pro: false, Enterprise: true },
+              },
+              {
+                name: 'Migration services',
+                value: { Starter: false, Standard: false, Pro: false, Enterprise: 'White-glove' },
+              },
+              {
+                name: 'Implementation Services',
+                value: { Starter: false, Standard: false, Pro: false, Enterprise: 'White-glove' },
+              },
+              {
+                name: 'Security review',
+                value: { Starter: false, Standard: false, Pro: false, Enterprise: true },
+              },
+              {
+                name: 'Legal review',
+                value: { Starter: false, Standard: false, Pro: false, Enterprise: true },
+              },
+              {
+                name: 'Custom SLAs',
+                value: { Starter: false, Standard: false, Pro: false, Enterprise: true },
               },
             ],
           },
         ]}
       />
-      {/* Testimonial */}
-      <TestimonialTwoColumnWithLargePhoto
-        id="testimonial"
-        quote={
-          <p>
-            Ever since we started using Oatmeal, our customer satisfaction scores have skyrocketed. The personal touch
-            that their human-AI hybrid support provides is unparalleled.
-          </p>
-        }
-        img={
-          <Image
-            src="/img/avatars/16-h-1000-w-1400.webp"
-            alt=""
-            className="not-dark:bg-white/75 dark:bg-black/75"
-            width={1400}
-            height={1000}
-          />
-        }
-        name="Lynn Marshall"
-        byline="Founder at Pine Labs"
-      />
-      {/* FAQs */}
-      <FAQsAccordion id="faqs" headline="Questions & Answers">
-        <Faq
-          id="faq-1"
-          question="Do I need a credit card to start the free trial?"
-          answer="Yes, but don't worry, you won't be charged until the trial period is over. We won't send you an email reminding you when this happens because we are really hoping you'll forget and we can keep charging you until your cards expires"
-        />
-        <Faq
-          id="faq-2"
-          question="Can my whole team use the same inbox?"
-          answer="Yes, the more the merrier! Oatmeal works best when your entire company has access. We will charge you per additional seat, but we won't tell you about this until you get your invoice."
-        />
-        <Faq
-          id="faq-3"
-          question="Is the AI agent actually a bunch of people in India?"
-          answer="Not just India! We have people in lots of countries around the world pretending to be an AI, including some that are currently under sanctions, so we can't legally mention them here."
-        />
-        <Faq
-          id="faq-4"
-          question="Does Oatmeal replace my email client?"
-          answer="Absolutely. The idea is that we transition you away from email entirely, so you become completely dependent on our service. Like a parasite living off a host."
-        />
-      </FAQsAccordion>
+      {/* Social proof */}
+      <TrustedBy content={TRUSTED_BY_CONTENT} />
       {/* Call To Action */}
       <CallToActionSimpleCentered
         id="call-to-action"
-        headline="Have anymore questions?"
+        headline="Get started for free. No credit card required."
         subheadline={
-          <p>Chat to someone on our sales team, who will make promises about our roadmap that we won't keep.</p>
+          <>
+            <p>
+              Start with the full platform, publish your first documentation site, and upgrade when your team needs more
+              seats, private docs, analytics, authentication, or higher AI usage.
+            </p>
+            <p className="font-mono text-sm/[21px] tracking-[-0.01em] text-mauve-500">
+              Live in under 5 min · No credit card required
+            </p>
+          </>
         }
         cta={
           <>
-            <ButtonLink href="#" size="lg">
-              Chat with us
+            <ButtonLink href={DASHBOARD_URL} size="lg">
+              Start for Free
             </ButtonLink>
 
-            <PlainButtonLink href="#" size="lg">
-              Book a demo <ChevronIcon />
+            <PlainButtonLink href={DEMO_URL} size="lg">
+              Book a Demo
             </PlainButtonLink>
           </>
         }
